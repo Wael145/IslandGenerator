@@ -18,7 +18,7 @@ public static class MeshGenerator
         for (int j = 0; j < height; j++)
             for (int i = 0; i < width; i++)
             {
-                vertices[j * width + i] = new Vector3(i, noiseMap[i,j] * 15, j);
+                vertices[j * width + i] = new Vector3(i, noiseMap[i,j] * 25, j);
                 uvs[j * width + i] = new Vector2(i / (float)width, j / (float)height);
                 colors[j * width + i] = ChooseColorFromHeight(noiseMap[i,j]);
             }

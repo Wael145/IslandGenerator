@@ -154,10 +154,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab1fd73c2c58994d9d0b95df8365380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 50
-  width: 50
+  height: 100
+  width: 100
+  octaves: 4
+  persistance: 0.5
+  lacunarity: 2
+  seed: 0
   offset: {x: 0, y: 0}
-  perlinScale: 1
+  perlinScale: 5
+  regions:
+  - name: Water Deep
+    height: 0.3
+    color: {r: 0.12437701, g: 0.30110803, b: 0.6132076, a: 0}
+  - name: Water shallow
+    height: 0.4
+    color: {r: 0.21791564, g: 0.42299336, b: 0.7830189, a: 0}
+  - name: Sand
+    height: 0.45
+    color: {r: 0.89891756, g: 0.9528302, b: 0.48989856, a: 0}
+  - name: Grass
+    height: 0.55
+    color: {r: 0.3563546, g: 0.8301887, b: 0.5197457, a: 0}
+  - name: Mountain mid
+    height: 0.75
+    color: {r: 0.5, g: 0.3639671, b: 0.21933961, a: 0}
+  - name: Mountain top
+    height: 1
+    color: {r: 1, g: 1, b: 1, a: 0}
 --- !u!33 &621370087
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -201,7 +224,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a559d01c4d47bf94187fb75f2d57f9cd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -530,8 +553,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   height: 100
   width: 100
+  octaves: 4
+  persistance: 0.5
+  lacunarity: 2
+  seed: 0
   offset: {x: 0, y: 0}
   perlinScale: 5
+  regions:
+  - name: Water Deep
+    height: 0.3
+    color: {r: 0.12437701, g: 0.30110803, b: 0.6132076, a: 0}
+  - name: Water shallow
+    height: 0.4
+    color: {r: 0.21791564, g: 0.42299336, b: 0.7830189, a: 0}
+  - name: Sand
+    height: 0.45
+    color: {r: 0.89891756, g: 0.9528302, b: 0.48989856, a: 0}
+  - name: Grass
+    height: 0.55
+    color: {r: 0.3563546, g: 0.8301887, b: 0.5197457, a: 0}
+  - name: Mountain mid
+    height: 0.75
+    color: {r: 0.5, g: 0.3639671, b: 0.21933961, a: 0}
+  - name: Mountain top
+    height: 1
+    color: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
