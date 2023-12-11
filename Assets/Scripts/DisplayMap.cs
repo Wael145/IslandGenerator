@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DisplayMap : MonoBehaviour
@@ -14,20 +15,22 @@ public class DisplayMap : MonoBehaviour
     public float lacunarity;
 
     public int seed;
-
     public Vector2 offset;
     public float perlinScale;
-
+    List<Vector3> vertices;
     public TerrainType[] regions;
     private void Start()
     {
+        vertices = new List<Vector3>();
         GenerateMap();
+        TreesGenerator.GenerateTrees(vertices);
         //GetComponent<Renderer>().material.mainTexture = noiseTexture;
     }
 
     private void Update()
     {
         GenerateMap();
+        
         //GetComponent<Renderer>().material.mainTexture = noiseTexture;
     }
 
@@ -55,7 +58,8 @@ public class DisplayMap : MonoBehaviour
 
         Texture2D noiseTexture = PerlinNoise.PerlinColorTexture(colorMap, width, height);
         //GetComponent<Renderer>().material.mainTexture = noiseTexture;
-        GetComponent<MeshFilter>().mesh = MeshGenerator.GenerateTerrainMesh(noiseMap);
+        GetComponent<MeshFilter>().mesh = MeshGenerator.GenerateTerrainMesh(noiseMap); 
+        vertices = GetComponent<MeshFilter>().mesh.vertices.ToList();
         GetComponent<MeshRenderer>().material.mainTexture = noiseTexture;
     }
 
