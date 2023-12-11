@@ -69,8 +69,6 @@ public class PerlinNoise
         }
                 return noiseMap;
     }
-
-
     public static Texture2D PerlinGrayTexture(float[,] noiseMap)
     {
         Texture2D noiseTexture = new Texture2D(noiseMap.GetLength(0), noiseMap.GetLength(1));

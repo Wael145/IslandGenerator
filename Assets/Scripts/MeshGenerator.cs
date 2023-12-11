@@ -4,13 +4,13 @@ using UnityEngine;
 
 public static class MeshGenerator
 {
+    public static Vector3[] vertices;
     public static Mesh GenerateTerrainMesh(float[,] noiseMap)
     {
         Mesh meshTerrain = new Mesh();
         int width = noiseMap.GetLength(0);
         int height = noiseMap.GetLength(1);
-        
-        Vector3[] vertices = new Vector3[width * height];
+        vertices = new Vector3[width * height];
         Vector2[] uvs = new Vector2[width * height];
         Color[] colors = new Color[width * height];
         int[] triangles = new int[(width - 1) * (height - 1) * 6];
@@ -21,6 +21,7 @@ public static class MeshGenerator
                 vertices[j * width + i] = new Vector3(i, noiseMap[i,j] * 25, j);
                 uvs[j * width + i] = new Vector2(i / (float)width, j / (float)height);
                 colors[j * width + i] = ChooseColorFromHeight(noiseMap[i,j]);
+                
             }
 
         int indexTriangle = 0;
