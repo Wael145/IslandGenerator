@@ -14,6 +14,9 @@ public class DisplayMap : MonoBehaviour
     [Range(-10f, 10f)]
     public float lacunarity;
 
+    [Range(1, 15)]
+    public int invLOD;
+
     public int seed;
     public Vector2 offset;
     public float perlinScale;
@@ -23,7 +26,7 @@ public class DisplayMap : MonoBehaviour
     {
         vertices = new List<Vector3>();
         GenerateMap();
-        TreesGenerator.GenerateTrees(vertices);
+        //TreesGenerator.GenerateTrees(vertices);
         //GetComponent<Renderer>().material.mainTexture = noiseTexture;
     }
 
@@ -58,7 +61,7 @@ public class DisplayMap : MonoBehaviour
 
         Texture2D noiseTexture = PerlinNoise.PerlinColorTexture(colorMap, width, height);
         //GetComponent<Renderer>().material.mainTexture = noiseTexture;
-        GetComponent<MeshFilter>().mesh = MeshGenerator.GenerateTerrainMesh(noiseMap); 
+        GetComponent<MeshFilter>().mesh = MeshGenerator.GenerateTerrainMesh(noiseMap, invLOD); 
         vertices = GetComponent<MeshFilter>().mesh.vertices.ToList();
         GetComponent<MeshRenderer>().material.mainTexture = noiseTexture;
     }

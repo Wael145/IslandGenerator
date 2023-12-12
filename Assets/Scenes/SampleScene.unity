@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &609919825
 Transform:
   m_ObjectHideFlags: 0
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609919824}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae8752729aa3f224d8f7bf1e4486063f, type: 3}
   m_Name: 
@@ -207,9 +207,10 @@ MonoBehaviour:
   octaves: 4
   persistance: 0.5
   lacunarity: 2
+  invLOD: 1
   seed: 0
-  offset: {x: 0, y: 0}
-  perlinScale: 5
+  offset: {x: 6.52, y: 4.44}
+  perlinScale: 1.25
   regions:
   - name: Water Deep
     height: 0.3
@@ -219,13 +220,19 @@ MonoBehaviour:
     color: {r: 0.21791564, g: 0.42299336, b: 0.7830189, a: 0}
   - name: Sand
     height: 0.45
-    color: {r: 0.89891756, g: 0.9528302, b: 0.48989856, a: 0}
+    color: {r: 0.946834, g: 1, b: 0.5518868, a: 0}
   - name: Grass
     height: 0.55
-    color: {r: 0.3563546, g: 0.8301887, b: 0.5197457, a: 0}
+    color: {r: 0.2775454, g: 0.764151, b: 0.44707245, a: 0}
+  - name: Mountain top
+    height: 0.65
+    color: {r: 0.12820399, g: 0.6320754, b: 0.30293354, a: 0}
+  - name: Mountain low
+    height: 0.7
+    color: {r: 0.509434, g: 0.4097099, b: 0.30998576, a: 0}
   - name: Mountain mid
-    height: 0.75
-    color: {r: 0.5, g: 0.3639671, b: 0.21933961, a: 0}
+    height: 0.85
+    color: {r: 0.3773585, g: 0.29753265, b: 0.24029905, a: 0}
   - name: Mountain top
     height: 1
     color: {r: 1, g: 1, b: 1, a: 0}
@@ -604,9 +611,10 @@ MonoBehaviour:
   octaves: 4
   persistance: 0.5
   lacunarity: 2
+  invLOD: 0
   seed: 0
-  offset: {x: 0, y: 0}
-  perlinScale: 5
+  offset: {x: 6.52, y: 4.44}
+  perlinScale: 1.25
   regions:
   - name: Water Deep
     height: 0.3
@@ -616,13 +624,19 @@ MonoBehaviour:
     color: {r: 0.21791564, g: 0.42299336, b: 0.7830189, a: 0}
   - name: Sand
     height: 0.45
-    color: {r: 0.89891756, g: 0.9528302, b: 0.48989856, a: 0}
+    color: {r: 0.946834, g: 1, b: 0.5518868, a: 0}
   - name: Grass
     height: 0.55
-    color: {r: 0.3563546, g: 0.8301887, b: 0.5197457, a: 0}
+    color: {r: 0.2775454, g: 0.764151, b: 0.44707245, a: 0}
+  - name: Mountain top
+    height: 0.65
+    color: {r: 0.12820399, g: 0.6320754, b: 0.30293354, a: 0}
+  - name: Mountain low
+    height: 0.7
+    color: {r: 0.509434, g: 0.4097099, b: 0.30998576, a: 0}
   - name: Mountain mid
-    height: 0.75
-    color: {r: 0.5, g: 0.3639671, b: 0.21933961, a: 0}
+    height: 0.85
+    color: {r: 0.3773585, g: 0.29753265, b: 0.24029905, a: 0}
   - name: Mountain top
     height: 1
     color: {r: 1, g: 1, b: 1, a: 0}

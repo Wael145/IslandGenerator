@@ -5,11 +5,11 @@ using UnityEngine;
 public static class MeshGenerator
 {
     public static Vector3[] vertices;
-    public static Mesh GenerateTerrainMesh(float[,] noiseMap)
+    public static Mesh GenerateTerrainMesh(float[,] noiseMap, int invLod)
     {
         Mesh meshTerrain = new Mesh();
-        int width = noiseMap.GetLength(0);
-        int height = noiseMap.GetLength(1);
+        int width = noiseMap.GetLength(0) / invLod;
+        int height = noiseMap.GetLength(1) / invLod;
         vertices = new Vector3[width * height];
         Vector2[] uvs = new Vector2[width * height];
         Color[] colors = new Color[width * height];
@@ -18,9 +18,11 @@ public static class MeshGenerator
         for (int j = 0; j < height; j++)
             for (int i = 0; i < width; i++)
             {
-                vertices[j * width + i] = new Vector3(i, noiseMap[i,j] * 25, j);
-                uvs[j * width + i] = new Vector2(i / (float)width, j / (float)height);
-                colors[j * width + i] = ChooseColorFromHeight(noiseMap[i,j]);
+                float jScaled = noiseMap.GetLength(1) * j / (float)(height - 1); // on veut aller jusqu'à la largeur L totale en n pas
+                float iScaled = noiseMap.GetLength(0) * i / (float)(width - 1) ;
+                vertices[j * width + i] = new Vector3(iScaled, noiseMap[Mathf.Max((int)iScaled - 1, 0), Mathf.Max((int)jScaled - 1, 0)] * 25, jScaled);
+                uvs[j * width + i] = new Vector2(i / (float)(width - 1), j / (float)(height - 1));
+                //colors[j * width + i] = ChooseColorFromHeight(noiseMap[iScaled, jScaled]);
                 
             }
 
