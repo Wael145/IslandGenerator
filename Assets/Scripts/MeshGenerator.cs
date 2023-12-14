@@ -23,7 +23,6 @@ public static class MeshGenerator
                 vertices[j * width + i] = new Vector3(iScaled, noiseMap[Mathf.Max((int)iScaled - 1, 0), Mathf.Max((int)jScaled - 1, 0)] * 25, jScaled);
                 uvs[j * width + i] = new Vector2(i / (float)(width - 1), j / (float)(height - 1));
                 //colors[j * width + i] = ChooseColorFromHeight(noiseMap[iScaled, jScaled]);
-                
             }
 
         int indexTriangle = 0;

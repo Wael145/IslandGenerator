@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.UIElements;
+using Color = UnityEngine.Color;
 
 public class PerlinNoise
 {
@@ -88,5 +90,25 @@ public class PerlinNoise
             return true;
         }
         return false;
+    }
+    public static float GetLevel(float[,] noiseMap, int i, int j)
+    {
+        return noiseMap[i,j];
+    }
+
+    public static float[,] TreesNoiseMap(int width, int height)
+    {
+        float treeNoiseScale = .05f;
+        float[,] noiseMap = new float[width, height];
+        (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
+        for (int y = 0; y < width; y++)
+        {
+            for (int x = 0; x < height; x++)
+            {
+                float noiseValue = Mathf.PerlinNoise(x * treeNoiseScale + xOffset, y * treeNoiseScale + yOffset);
+                noiseMap[x, y] = noiseValue;
+            }
+        }
+        return noiseMap;
     }
 }

@@ -21,12 +21,28 @@ public class DisplayMap : MonoBehaviour
     public Vector2 offset;
     public float perlinScale;
     List<Vector3> vertices;
+    List<Vector3> zone1;
+    List<Vector3> zone2;
+    List<Vector3> zone3;
+    List<Vector3> zone4;
+    List<Vector3> zone5;
+
+    float level;
     public TerrainType[] regions;
     private void Start()
     {
         vertices = new List<Vector3>();
+        zone1 = new List<Vector3>();
+        zone2 = new List<Vector3>(); 
+        zone4 = new List<Vector3>(); 
+        zone5 = new List<Vector3>();
+        zone3 = new List<Vector3>();
         GenerateMap();
-        TreesGenerator.GenerateTrees(vertices);
+        TreesGenerator.GenerateTrees(zone1,80);
+        TreesGenerator.GenerateTrees(zone2,60);
+        TreesGenerator.GenerateTrees(zone3,50);
+        TreesGenerator.GenerateTrees(zone4,20);
+        TreesGenerator.GenerateTrees(zone5,10);
     }
 
     private void Update()
@@ -59,7 +75,6 @@ public class DisplayMap : MonoBehaviour
                 
             }
         }
-
         Texture2D noiseTexture = PerlinNoise.PerlinColorTexture(colorMap, width, height);
         //GetComponent<Renderer>().material.mainTexture = noiseTexture;
         GetComponent<MeshFilter>().mesh = MeshGenerator.GenerateTerrainMesh(noiseMap, invLOD);
@@ -69,9 +84,30 @@ public class DisplayMap : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
+                level = PerlinNoise.GetLevel(noiseMap, i, j);
                 if ((PerlinNoise.isWater(noiseMap, i, j)))
                 { 
                     vertices[j * width + i] = Vector3.zero;
+                }
+                else if (level > 0.4 && level <= 0.55)
+                {
+                    zone1.Add(vertices[j * width + i]);
+                }
+                else if(level >0.55 && level<=0.65)
+                {
+                    zone2.Add(vertices[j * width + i]);
+                }
+                else if(level>0.65 && level<=0.7)
+                {
+                    zone3.Add(vertices[j * width + i]);
+                }
+                else if (level> 0.7 && level <=0.85)
+                {
+                    zone4.Add(vertices[j * width + i]);
+                }
+                else if (level> 0.85 && level <=1)
+                {
+                    zone5.Add(vertices[j * width + i]);
                 }
             }
         }
