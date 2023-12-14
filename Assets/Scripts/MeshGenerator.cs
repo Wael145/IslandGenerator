@@ -15,7 +15,7 @@ public static class MeshGenerator
         Color[] colors = new Color[width * height];
         int[] triangles = new int[(width - 1) * (height - 1) * 6];
 
-        for (int j = 0; j < height; j++)
+            for (int j = 0; j < height; j++)
             for (int i = 0; i < width; i++)
             {
                 float jScaled = noiseMap.GetLength(1) * j / (float)(height - 1); // on veut aller jusqu'à la largeur L totale en n pas
@@ -50,16 +50,5 @@ public static class MeshGenerator
         meshTerrain.RecalculateTangents();
 
         return meshTerrain;
-    }
-
-    public static Color ChooseColorFromHeight(float height)
-    {
-        if (height < 0.2f)
-            return Color.blue;
-        else if (height < 0.4f)
-            return Color.green;
-        else if (height < 0.7f)
-            return new Color(82f/255f, 65f/255f, 36f/255f);
-        else return Color.white;
     }
 }
