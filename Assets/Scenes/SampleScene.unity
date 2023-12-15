@@ -207,6 +207,40 @@ MonoBehaviour:
   octaves: 4
   persistance: 0.5
   lacunarity: 2
+  meshHeightMultiplier: 20
+  meshHeightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.3912877
+      value: 0.019961871
+      inSlope: 0.14131176
+      outSlope: 0.14131176
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18332723
+      outWeight: 0.10673899
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   invLOD: 1
   seed: 0
   offset: {x: 6.52, y: 4.44}
@@ -611,6 +645,13 @@ MonoBehaviour:
   octaves: 4
   persistance: 0.5
   lacunarity: 2
+  meshHeightMultiplier: 0
+  meshHeightCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   invLOD: 0
   seed: 0
   offset: {x: 6.52, y: 4.44}

@@ -14,12 +14,17 @@ public class DisplayMap : MonoBehaviour
     [Range(-10f, 10f)]
     public float lacunarity;
 
+    [Range(1f,100f)]
+    public float meshHeightMultiplier;
+
+    public AnimationCurve meshHeightCurve;
     [Range(1, 15)]
     public int invLOD;
     Mesh mesh;
     public int seed;
     public Vector2 offset;
     public float perlinScale;
+
     List<Vector3> vertices;
     List<Vector3> zone1;
     List<Vector3> zone2;
@@ -77,7 +82,7 @@ public class DisplayMap : MonoBehaviour
         }
         Texture2D noiseTexture = PerlinNoise.PerlinColorTexture(colorMap, width, height);
         //GetComponent<Renderer>().material.mainTexture = noiseTexture;
-        GetComponent<MeshFilter>().mesh = MeshGenerator.GenerateTerrainMesh(noiseMap, invLOD);
+        GetComponent<MeshFilter>().mesh = MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, meshHeightCurve, invLOD);
         vertices = GetComponent<MeshFilter>().mesh.vertices.ToList();
         mesh = GetComponent<MeshFilter>().mesh;
         for (int i = 0; i < width; i++)

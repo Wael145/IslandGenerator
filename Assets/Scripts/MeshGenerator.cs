@@ -5,7 +5,7 @@ using UnityEngine;
 public static class MeshGenerator
 {
     public static Vector3[] vertices;
-    public static Mesh GenerateTerrainMesh(float[,] noiseMap, int invLod)
+    public static Mesh GenerateTerrainMesh(float[,] noiseMap, float meshHeightMultiplier, AnimationCurve meshHeightCurve, int invLod)
     {
         Mesh meshTerrain = new Mesh();
         int width = noiseMap.GetLength(0) / invLod;
@@ -20,7 +20,7 @@ public static class MeshGenerator
             {
                 float jScaled = noiseMap.GetLength(1) * j / (float)(height - 1); // on veut aller jusqu'à la largeur L totale en n pas
                 float iScaled = noiseMap.GetLength(0) * i / (float)(width - 1) ;
-                vertices[j * width + i] = new Vector3(iScaled, noiseMap[Mathf.Max((int)iScaled - 1, 0), Mathf.Max((int)jScaled - 1, 0)] * 25, jScaled);
+                vertices[j * width + i] = new Vector3(iScaled, meshHeightCurve.Evaluate(noiseMap[Mathf.Max((int)iScaled - 1, 0), Mathf.Max((int)jScaled - 1, 0)]) * meshHeightMultiplier, jScaled);
                 uvs[j * width + i] = new Vector2(i / (float)(width - 1), j / (float)(height - 1));
                 //colors[j * width + i] = ChooseColorFromHeight(noiseMap[iScaled, jScaled]);
             }

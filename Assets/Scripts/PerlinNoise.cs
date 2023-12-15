@@ -71,6 +71,21 @@ public class PerlinNoise
         }
                 return noiseMap;
     }
+    public static Texture2D PerlinGrayTexture(float[,] noiseMap)
+    {
+        Texture2D noiseTexture = new Texture2D(noiseMap.GetLength(0), noiseMap.GetLength(1));
+        noiseTexture.filterMode = FilterMode.Point;
+        noiseTexture.wrapMode = TextureWrapMode.Clamp;
+        for (int i = 0; i < noiseMap.GetLength(0); i++)
+            for (int j = 0; j < noiseMap.GetLength(1); j++)
+            {
+                Color noiseColor = new Color(noiseMap[i, j], noiseMap[i, j], noiseMap[i, j]);
+                noiseTexture.SetPixel(i, j, noiseColor);
+            }
+        noiseTexture.Apply();
+        return noiseTexture;
+    }
+
     public static Texture2D PerlinColorTexture(Color[] colorMap, int width, int height)
     {
         Texture2D noiseTexture = new Texture2D(height, width);
