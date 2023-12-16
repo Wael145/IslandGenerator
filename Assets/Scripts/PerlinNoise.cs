@@ -100,7 +100,7 @@ public class PerlinNoise
     }
     public static bool isWater(float[,] noiseMap, int i, int j)
     { 
-        if (noiseMap[i, j] < 0.4)
+        if (noiseMap[i, j] < 0.45)
         {
             return true;
         }
