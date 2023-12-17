@@ -15,10 +15,12 @@
 -Procedural Landmass Generation
 https://www.youtube.com/watch?v=wbpMiKiSKm8
 <h3>Assets :<h3>
+<p>
 	-Trees : https://assetstore.unity.com/packages/3d/vegetation/trees/low-poly-tree-pack-57866
 	<br>
 	-Rocks : https://assetstore.unity.com/packages/3d/environments/landscapes/lowpoly-style-free-rocks-and-plants-145133
 	<br>
 	-Plants : https://assetstore.unity.com/packages/3d/vegetation/simple-low-poly-decorative-plant-assets-252714
-  <br><br>
+</p>  
+	<br><br>
 </div>
