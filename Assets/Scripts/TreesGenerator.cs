@@ -33,7 +33,7 @@ public class TreesGenerator : MonoBehaviour
                 GameObject tree = Instantiate(prefab);
                 tree.transform.position = new Vector3(vertice.x, vertice.y, vertice.z);
                 tree.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360f), 0);
-                tree.transform.localScale = Vector3.one * Random.Range(.2f, .4f);
+                tree.transform.localScale = Vector3.one * Random.Range(.1f, .3f);
                     
             
             }

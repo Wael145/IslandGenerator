@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c8fd0d31d77530344baa4b459b8e221e
+guid: d2821924b86cff5439f12b0289585dbf
 timeCreated: 1457641006
 licenseType: Store
 ModelImporter:
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Tree_Type0_05_mesh
+    4300000: Tree_Type0_01_mesh
     6400000: //RootNode
     9500000: //RootNode
   materials:

@@ -29,8 +29,14 @@ public class DisplayMap : MonoBehaviour
     public float perlinScale;
     public bool useFalloff;
     public float[,] falloffMap;
-    public float treeDensityMultiplier = 1f;
-    public float rockDensityMultiplier = 1f;
+    public float treeDensityMultiplier = 1.0f;
+    public float level1TreeDensity=0.8f;
+    public float level2TreeDensity=0.5f; 
+    public float level3TreeDensity=0.0f;
+    [Range(0, 1)]
+    public float rockDensityMultiplier = 1.0f;
+    public float rockDensity = 0.8f;
+    public float foliageDensityMultiplier = 10.0f;
     private List<Vector3> vertices;
     private float[,] treeNoiseMap;
     private float[,] usedMap;
@@ -122,16 +128,17 @@ public class DisplayMap : MonoBehaviour
 
                     if (level > 0.45 && level <= 0.65)
                     {
-                        treeDensity *= 10f;
+                        treeDensityMultiplier = level1TreeDensity;
                     }
                     else if (level > 0.65 && level < 0.8)
                     {
-                        treeDensity *= 0.8f; 
+                        treeDensityMultiplier = level2TreeDensity; 
                     }
                     else if (level >= 0.8)
                     {
-                        treeDensity *= 0.0f; 
+                        treeDensityMultiplier = level3TreeDensity; 
                     }
+                    treeDensity *= treeDensityMultiplier;
                     Vector3 treePosition = vertices[j * width + i];
                     if (Random.Range(0f, 1f) < treeDensity)
                     {
@@ -242,7 +249,7 @@ public class DisplayMap : MonoBehaviour
     {
         if (terrainLevel >= 0.65 && terrainLevel < 0.8)
         {
-            return 0.8f; 
+            return rockDensity; 
         }
         return 0.0f; 
     }
@@ -255,7 +262,7 @@ public class DisplayMap : MonoBehaviour
     {
         if (terrainLevel < 0.6 )
         {
-            return 10f;
+            return foliageDensityMultiplier;
         }
         return 0.0f;
     }
