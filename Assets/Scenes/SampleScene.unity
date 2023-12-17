@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -196,7 +196,7 @@ Transform:
   m_GameObject: {fileID: 307711339}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25089.549, y: 10653.304, z: -18593.861}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -259,7 +259,12 @@ MonoBehaviour:
   perlinScale: 10
   useFalloff: 1
   treeDensityMultiplier: 5
+  level1TreeDensity: 0.8
+  level2TreeDensity: 0.5
+  level3TreeDensity: 0
   rockDensityMultiplier: 2
+  rockDensity: 0.8
+  foliageDensityMultiplier: 10
   regions:
   - name: Water Deep
     height: 0.3
@@ -272,10 +277,10 @@ MonoBehaviour:
     color: {r: 0.946834, g: 1, b: 0.5518868, a: 0}
   - name: Grass
     height: 0.55
-    color: {r: 0.2775454, g: 0.764151, b: 0.44707245, a: 0}
+    color: {r: 0.034603007, g: 0.6792453, b: 0.25853142, a: 0}
   - name: Mountain top
     height: 0.65
-    color: {r: 0.12820399, g: 0.6320754, b: 0.30293354, a: 0}
+    color: {r: 0.02114628, g: 0.41509432, b: 0.15574521, a: 0}
   - name: Mountain low
     height: 0.7
     color: {r: 0.509434, g: 0.4097099, b: 0.30998576, a: 0}
@@ -380,9 +385,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TreePrefabs:
-  - {fileID: 166856, guid: 99a48108c5a1932488c06e519f6097f4, type: 3}
-  - {fileID: 117604, guid: 9469bb1d3aa88ca40aa4079e96a27f8e, type: 3}
-  - {fileID: 160606, guid: 5c3cbac9d5eae3844a928d36e6dbd1a6, type: 3}
+  - {fileID: 142018, guid: d537224908c5f444f86c9e57e0c7234c, type: 3}
+  - {fileID: 151792, guid: 1e4e7284c1efd5f4eb702c799353072c, type: 3}
+  - {fileID: 143020, guid: aee731a00031fcc4d9d2b075e528e050, type: 3}
 --- !u!1 &621370085
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +414,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 621370085}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fab1fd73c2c58994d9d0b95df8365380, type: 3}
   m_Name: 
@@ -459,7 +464,12 @@ MonoBehaviour:
   perlinScale: 1.25
   useFalloff: 0
   treeDensityMultiplier: 1
+  level1TreeDensity: 0.8
+  level2TreeDensity: 0.5
+  level3TreeDensity: 0
   rockDensityMultiplier: 1
+  rockDensity: 0.8
+  foliageDensityMultiplier: 10
   regions:
   - name: Water Deep
     height: 0.3
