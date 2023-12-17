@@ -110,20 +110,4 @@ public class PerlinNoise
     {
         return noiseMap[i,j];
     }
-
-    public static float[,] TreesNoiseMap(int width, int height)
-    {
-        float treeNoiseScale = .05f;
-        float[,] noiseMap = new float[width, height];
-        (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
-        for (int y = 0; y < width; y++)
-        {
-            for (int x = 0; x < height; x++)
-            {
-                float noiseValue = Mathf.PerlinNoise(x * treeNoiseScale + xOffset, y * treeNoiseScale + yOffset);
-                noiseMap[x, y] = noiseValue;
-            }
-        }
-        return noiseMap;
-    }
 }

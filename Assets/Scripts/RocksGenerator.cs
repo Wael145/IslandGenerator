@@ -20,23 +20,17 @@ public class RocksGenerator : MonoBehaviour
 
     }
 
-    public static void GenerateRocks(List<Vector3> vertices, int nbRocks)
+    public static void GenerateRocks(List<Vector3> vertices)
     {
-        //float v = Random.Range(0f, treeDensity);
-
-
-        for (int y = 0; y < nbRocks - 1; y++)
-        {
-            
             foreach(Vector3 vertice in vertices) { 
             if (vertice != Vector3.zero)
             {
                 GameObject rock_ = Instantiate(rock);
                 rock_.transform.position = new Vector3(vertice.x, vertice.y, vertice.z);
                 rock_.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360f), 0);
-                rock_.transform.localScale = Vector3.one * Random.Range(0.05f, 0.1f);
+                rock_.transform.localScale = Vector3.one * Random.Range(0.01f, 0.2f);
 
-            }}
+            }
         }
 
     }
