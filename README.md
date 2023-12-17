@@ -3,7 +3,6 @@
 <p> Il s'agit de la génération procédurale d'un terrain et gèrer l'emplacement des objets sur ce terrain. Ce travail est dans le cadre du module mondes virtuels de la formation GAMAGORA.</p>
 </div>
 <div>
-<div>
   <h3>Terrain Generation :<h3>
     <br><br>
 </div>
@@ -11,6 +10,7 @@
   <h3>Objects Placement :<h3>
     <br><br>
 </div>
+<div>
 <h3>Réferences :<h3>
 -Procedural Landmass Generation
 https://www.youtube.com/watch?v=wbpMiKiSKm8
