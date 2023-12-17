@@ -1,9 +1,9 @@
-Island Procedural generation with unity 
+**Island Procedural generation with unity**
 
 
 
 
-Réferences :
+**Réferences :**
 
 -Procedural Landmass Generation
 
