@@ -290,8 +290,8 @@ MonoBehaviour:
   seed: 0
   offset: {x: 6.52, y: 4.44}
   perlinScale: 1.25
-  treeDensityMultiplier: 5
-  rockDensityMultiplier: 2
+  treeDensityMultiplier: 1
+  rockDensityMultiplier: 1
   regions:
   - name: Water Deep
     height: 0.3
@@ -597,7 +597,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0960eddd7937518458f5afcd94e5fb35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grassPrefab: {fileID: 2927636393278870587, guid: 253abe04cf2bfe0489f909cddaeb3916, type: 3}
+  grassPrefabs:
+  - {fileID: 164619023307039763, guid: b81413d315cea164ea66e16ea4d91ff7, type: 3}
+  - {fileID: 2927636393278870587, guid: 253abe04cf2bfe0489f909cddaeb3916, type: 3}
+  - {fileID: 3820632885828067235, guid: 4b08b79708029db47a3fb8094d2ddeac, type: 3}
 --- !u!4 &1578875234
 Transform:
   m_ObjectHideFlags: 0

@@ -7,7 +7,6 @@ using static DisplayMap;
 
 public class TreesGenerator : MonoBehaviour
 {
-    public static GameObject[] _spawnPoints;
     public static GameObject[] TreePrefabs_;
     public GameObject[] TreePrefabs;
     

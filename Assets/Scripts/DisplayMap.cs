@@ -27,13 +27,12 @@ public class DisplayMap : MonoBehaviour
     public int seed;
     public Vector2 offset;
     public float perlinScale;
-    public float treeDensityMultiplier = 1f;
-    public float rockDensityMultiplier = 1f;
+    private float treeDensityMultiplier = 1f;
+    private float rockDensityMultiplier = 1f;
     private List<Vector3> vertices;
     private float[,] treeNoiseMap;
     private float[,] usedMap;
     private float level;
-    private bool canUpdate;
     public TerrainType[] regions;
     private List<Vector3> occupiedPositions;
     private float treeSize = 0.2f;
@@ -45,27 +44,24 @@ public class DisplayMap : MonoBehaviour
         PlaceTrees();
         PlaceRocks();
         PlaceGrass();
-        UpdatePreviousVertices();
-        canUpdate = false;
     }
 
     private void Update()
     {
          GenerateMap();
-        //if (canUpdate)
-        //{
-        //    DestroyAllObjects("Tree");
-        //    DestroyAllObjects("Rock");
-        //    DestroyAllObjects("Grass");
-        //    ClearOccupiedPositions();
-        //    UpdatePreviousVertices();
-        //    PlaceTrees();
-        //    PlaceRocks();
-        //    PlaceGrass();
-            
-        //}
     }
-//------------------------------------------Map------------------------------------------------------------------------------------
+    public void UpdatePlacement()
+    {
+        DestroyAllObjects("Tree");
+        DestroyAllObjects("Grass");
+        DestroyAllObjects("Rock");
+        UpdatePreviousVertices();
+        PlaceTrees();
+        PlaceRocks();
+        PlaceGrass();
+        
+    }
+    //------------------------------------------Map------------------------------------------------------------------------------------
     public void GenerateMap()
     {
         float[,] noiseMap = PerlinNoise.PerlinNoiseMap(width, height, seed, perlinScale, offset, octaves, persistance, lacunarity);
@@ -102,7 +98,7 @@ public class DisplayMap : MonoBehaviour
 //----------------------------------------trees--------------------------------------------------------------
     private void PlaceTrees()
     {
-        Dictionary<float, List<Vector3>> treesByLevel = new Dictionary<float, List<Vector3>>();
+        Dictionary<float, List<Vector3>> treesByHeight = new Dictionary<float, List<Vector3>>();
         for (int i = 0; i < width-1; i++)
         {
             for (int j = 0; j < height-1; j++)
@@ -128,14 +124,14 @@ public class DisplayMap : MonoBehaviour
                     Vector3 treePosition = vertices[j * width + i];
                     if (Random.Range(0f, 1f) < treeDensity)
                     {
-                        if (!IsObjectPositionOccupied(treePosition,treeSize) && !IsObjectCollision(treePosition,treeSize))
+                        if (!IsObjectPosFull(treePosition,treeSize) && !IsCollision(treePosition,treeSize))
                         {
-                            if (!treesByLevel.ContainsKey(level))
+                            if (!treesByHeight.ContainsKey(level))
                             {
-                                treesByLevel[level] = new List<Vector3>();
+                                treesByHeight[level] = new List<Vector3>();
                             }
-                            treesByLevel[level].Add(treePosition);
-                            MarkPositionAsOccupied(treePosition, treeSize);
+                            treesByHeight[level].Add(treePosition);
+                            MarkAsFull(treePosition, treeSize);
                         }
                     }
                 }
@@ -146,12 +142,12 @@ public class DisplayMap : MonoBehaviour
             }
         }
 
-        foreach (var kvp in treesByLevel)
+        foreach (var tree in treesByHeight)
         {
-            GenerateLevelTrees(kvp.Key, kvp.Value);
+            GenerateTrees(tree.Value);
         }
     }
-    private bool IsObjectCollision(Vector3 objectPosition, float size)
+    private bool IsCollision(Vector3 objectPosition, float size)
     {
         foreach (Vector3 existingObjectPosition in occupiedPositions)
         {
@@ -162,23 +158,22 @@ public class DisplayMap : MonoBehaviour
         }
         return false; 
     }
-    private void GenerateLevelTrees(float level, List<Vector3> treePositions)
+    private void GenerateTrees(List<Vector3> treePositions)
     {
         int numberOfTrees = Mathf.Max(treePositions.Count, 1);
-        List<Vector3> selectedTreePositions = GetRandomSubset(treePositions, numberOfTrees);
+        List<Vector3> selectedTreePositions = GetRandomList(treePositions, numberOfTrees);
         TreesGenerator.GenerateTrees(selectedTreePositions);
     }
-    private List<T> GetRandomSubset<T>(List<T> list, int count)
+    private List<T> GetRandomList<T>(List<T> listTrees, int count)
     {
-        List<T> subset = new List<T>();
-
-        for (int i = 0; i < Mathf.Min(count, list.Count); i++)
+        List<T> list = new List<T>();
+        for (int i = 0; i < Mathf.Min(count, listTrees.Count); i++)
         {
-            int randomIndex = Random.Range(0, list.Count);
-            subset.Add(list[randomIndex]);
-            list.RemoveAt(randomIndex);
+            int randomIndex = Random.Range(0, listTrees.Count);
+            list.Add(listTrees[randomIndex]);
+            listTrees.RemoveAt(randomIndex);
         }
-        return subset;
+        return list;
     }
     private float CalculateTreeDensity(float terrainHeight)
     {
@@ -205,14 +200,14 @@ public class DisplayMap : MonoBehaviour
                     Vector3 rockPosition = vertices[j * width + i];
                     if (Random.Range(0f, 1f) < rockDensity)
                     {
-                        if (!IsFull(rockPosition) && !IsObjectCollision(rockPosition, 0.1f))
+                        if (!IsFull(rockPosition) && !IsCollision(rockPosition, 0.1f))
                         {
                             if (!rocksByHeight.ContainsKey(level))
                             {
                                 rocksByHeight[level] = new List<Vector3>();
                             }
                             rocksByHeight[level].Add(rockPosition);
-                            MarkPositionAsOccupied(rockPosition,0.1f);
+                            MarkAsFull(rockPosition,0.1f);
                         }
                     }
                 }
@@ -276,7 +271,7 @@ public class DisplayMap : MonoBehaviour
                                 grassByHeight[level] = new List<Vector3>();
                             }
                             grassByHeight[level].Add(grassPosition);
-                            MarkPositionAsOccupied(grassPosition, 0.01f);
+                            MarkAsFull(grassPosition, 0.01f);
                         }
                     }
                 }
@@ -307,7 +302,7 @@ public class DisplayMap : MonoBehaviour
         vertices = GetComponent<MeshFilter>().mesh.vertices.ToList();
     }
 
-    private void MarkPositionAsOccupied(Vector3 position, float size)
+    private void MarkAsFull(Vector3 position, float size)
     {
         float radius = size / 2.0f;
         for (float x = position.x - radius; x <= position.x + radius; x++)
@@ -320,7 +315,7 @@ public class DisplayMap : MonoBehaviour
         }
     }
 
-    private bool IsObjectPositionOccupied(Vector3 position, float size)
+    private bool IsObjectPosFull(Vector3 position, float size)
     {
         foreach (Vector3 pos in occupiedPositions)
         {
@@ -331,7 +326,16 @@ public class DisplayMap : MonoBehaviour
         }
         return false;
     }
-//----------------------------structures-----------------------------------------------------
+    private void DestroyAllObjects(string tag)
+    {
+        GameObject[] cloned = GameObject.FindGameObjectsWithTag(tag);
+
+        foreach (GameObject obj in cloned)
+        {
+            Destroy(obj);
+        }
+    }
+    //----------------------------structures-----------------------------------------------------
     [System.Serializable]
     public struct TerrainType
     {
