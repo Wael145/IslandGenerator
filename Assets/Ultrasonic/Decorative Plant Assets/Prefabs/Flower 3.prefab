@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7013462888650042250}
   - component: {fileID: 6668815373344746018}
   - component: {fileID: 8332447382208553934}
+  - component: {fileID: 8948648443268951687}
   m_Layer: 0
   m_Name: Flower 3
   m_TagString: Grass
@@ -84,3 +85,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8948648443268951687
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2927636393278870587}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.37, y: 0.46453574, z: 0.3}
+  m_Center: {x: 0.05241424, y: 0.21847026, z: -0.03876112}

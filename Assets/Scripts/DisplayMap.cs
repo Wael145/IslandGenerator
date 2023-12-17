@@ -65,7 +65,7 @@ public class DisplayMap : MonoBehaviour
             
         //}
     }
-
+//------------------------------------------Map------------------------------------------------------------------------------------
     public void GenerateMap()
     {
         float[,] noiseMap = PerlinNoise.PerlinNoiseMap(width, height, seed, perlinScale, offset, octaves, persistance, lacunarity);
@@ -99,25 +99,7 @@ public class DisplayMap : MonoBehaviour
         
         GetComponent<MeshRenderer>().material.mainTexture = noiseTexture;
     }
-    public void PlaceGrass()
-    {
-        for (int i = 0; i < width; i++)
-        {
-            for (int j = 0; j < height; j++)
-            {
-                Vector3 grassPosition = vertices[j * width + i];
-                if (!PerlinNoise.isWater(treeNoiseMap, i, j) && IsGrass(treeNoiseMap, i, j))
-                {
-                    GenerateGrassAtPosition(grassPosition);
-                }
-                else
-                {
-                    vertices[j * width + i] = Vector3.zero;
-                }
-            }
-        }
-    }
-    
+//----------------------------------------trees--------------------------------------------------------------
     private void PlaceTrees()
     {
         Dictionary<float, List<Vector3>> treesByLevel = new Dictionary<float, List<Vector3>>();
@@ -198,32 +180,11 @@ public class DisplayMap : MonoBehaviour
         }
         return subset;
     }
-
-    private void MarkPositionAsOccupied(Vector3 position, float size)
+    private float CalculateTreeDensity(float terrainHeight)
     {
-        float radius = size / 2.0f;
-        for (float x = position.x - radius; x <= position.x + radius; x++)
-        {
-            for (float z = position.z - radius; z <= position.z + radius; z++)
-            {
-                Vector3 occupiedPosition = new Vector3(x, position.y, z);
-                occupiedPositions.Add(occupiedPosition);
-            }
-        }
+        return Mathf.PerlinNoise(terrainHeight * treeDensityMultiplier, 0);
     }
-    
-    private bool IsObjectPositionOccupied(Vector3 position,float size)
-    {
-        foreach (Vector3 pos in occupiedPositions)
-        {
-            if (Vector3.Distance(position, pos) < size)
-            {
-                return true;
-            }
-        }
-        return false; 
-    }
-
+    //----------------------------------------rocks--------------------------------------------------------------
     private void PlaceRocks()
     {
         Dictionary<float, List<Vector3>> rocksByHeight = new Dictionary<float, List<Vector3>>();
@@ -244,7 +205,6 @@ public class DisplayMap : MonoBehaviour
                     Vector3 rockPosition = vertices[j * width + i];
                     if (Random.Range(0f, 1f) < rockDensity)
                     {
-                        
                         if (!IsFull(rockPosition) && !IsObjectCollision(rockPosition, 0.1f))
                         {
                             if (!rocksByHeight.ContainsKey(level))
@@ -265,12 +225,11 @@ public class DisplayMap : MonoBehaviour
 
         foreach (var pos in rocksByHeight)
         {
-            GenerateRocks(pos.Key, pos.Value);
+            GenerateRocks(pos.Value);
         }
     }
-    private void GenerateRocks(float level, List<Vector3> rockPositions)
+    private void GenerateRocks(List<Vector3> rockPositions)
     {
-       
         RocksGenerator.GenerateRocks(rockPositions);
     }
     private float RockDensity(float terrainLevel)
@@ -281,53 +240,98 @@ public class DisplayMap : MonoBehaviour
         }
         return 0.0f; 
     }
-
-    private bool IsGrass(float[,] map, int x, int y)
-    {
-        float currentHeight = PerlinNoise.GetLevel(map, x, y);
-        return currentHeight < 0.7;
-    }
-    private bool IsFull(Vector3 position)
-    {
-        return occupiedPositions.Contains(position);
-    }
-    private void MarkPositionAsOccupied(Vector3 position)
-    {
-        occupiedPositions.Add(position);
-    }  
-    private float CalculateTreeDensity(float terrainHeight)
-    {
-        return Mathf.PerlinNoise(terrainHeight * treeDensityMultiplier, 0);
-    }
-    private void GenerateGrassAtPosition(Vector3 position)
-    {
-        int numberOfHerbs = 2;
-        List<Vector3> grassPositions = new List<Vector3>();
-
-        for (int i = 0; i < numberOfHerbs; i++)
-        {
-            Vector3 randomOffset = new Vector3(Random.Range(0f, 0.8f), 0.0f, 0f);
-
-            Vector3 grassPosition = position + randomOffset;
-            if (!IsFull(grassPosition))
-            {
-
-                MarkPositionAsOccupied(grassPosition);
-                grassPositions.Add(grassPosition);
-            }
-        }
-
-        GrassFoliage.GenerateFoliage(grassPositions, numberOfHerbs);
-    }
     private float CalculateRockDensity(float terrainHeight)
     {
         return Mathf.PerlinNoise(terrainHeight * rockDensityMultiplier, 0);
     }
-    
+ //-------------------------------------------Grass--------------------------------------------------------------------
+    private float GrassDensity(float terrainLevel)
+    {
+        if (terrainLevel < 0.6 )
+        {
+            return 10f;
+        }
+        return 0.0f;
+    }
+    public void PlaceGrass()
+    {
+        Dictionary<float, List<Vector3>> grassByHeight = new Dictionary<float, List<Vector3>>();
+
+        for (int i = 0; i < width - 1; i++)
+        {
+            for (int j = 0; j < height - 1; j++)
+            {
+                level = PerlinNoise.GetLevel(usedMap, i, j);
+                if (!PerlinNoise.isWater(usedMap, i, j))
+                {
+                    float grassDensity = 1f;
+                    grassDensity *= GrassDensity(level);
+                    Vector3 grassPosition = vertices[j * width + i];
+                    if (Random.Range(0f, 1f) < grassDensity)
+                    {
+                        if ((!IsFull(grassPosition)))
+                        {
+                            if (!grassByHeight.ContainsKey(level))
+                            {
+                                grassByHeight[level] = new List<Vector3>();
+                            }
+                            grassByHeight[level].Add(grassPosition);
+                            MarkPositionAsOccupied(grassPosition, 0.01f);
+                        }
+                    }
+                }
+                else
+                {
+                    vertices[j * width + i] = Vector3.zero;
+                }
+            }
+        }
+
+        foreach (var pos in grassByHeight)
+        {
+            GenerateGrass(pos.Value);
+        }
+    } 
+    private void GenerateGrass(List<Vector3> grassPositions)
+    {
+        GrassFoliage.GenerateFoliage(grassPositions);
+    }
+    //-------------------------------------------Used by all--------------------------------------------------------------------
+    private bool IsFull(Vector3 position)
+    {
+        return occupiedPositions.Contains(position);
+    }
+
     private void UpdatePreviousVertices()
     {
         vertices = GetComponent<MeshFilter>().mesh.vertices.ToList();
     }
+
+    private void MarkPositionAsOccupied(Vector3 position, float size)
+    {
+        float radius = size / 2.0f;
+        for (float x = position.x - radius; x <= position.x + radius; x++)
+        {
+            for (float z = position.z - radius; z <= position.z + radius; z++)
+            {
+                Vector3 occupiedPosition = new Vector3(x, position.y, z);
+                occupiedPositions.Add(occupiedPosition);
+            }
+        }
+    }
+
+    private bool IsObjectPositionOccupied(Vector3 position, float size)
+    {
+        foreach (Vector3 pos in occupiedPositions)
+        {
+            if (Vector3.Distance(position, pos) < size)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+//----------------------------structures-----------------------------------------------------
     [System.Serializable]
     public struct TerrainType
     {

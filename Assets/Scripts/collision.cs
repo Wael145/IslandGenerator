@@ -10,6 +10,10 @@ public class collision : MonoBehaviour
         {
             gameObject.transform.position += new Vector3(Random.Range(-0.1f, 0.1f), 0f, 0);
         }
+        if (other.CompareTag("Grass"))
+        {
+            other.transform.position += new Vector3(Random.Range(-0.1f, 0.5f), 0f, 0);
+        }
         if (other.CompareTag("Rock"))
         {
             Destroy(other);

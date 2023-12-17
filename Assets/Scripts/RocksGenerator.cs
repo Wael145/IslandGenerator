@@ -30,6 +30,7 @@ public class RocksGenerator : MonoBehaviour
                 rock_.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360f), 0);
                 rock_.transform.localScale = Vector3.one * Random.Range(0.01f, 0.2f);
 
+
             }
         }
 
