@@ -1,5 +1,6 @@
 <div>
 <h1>Island Procedural generation with unity</h1>
+<p> Il s'agit de la génération procédurale d'un terrain et gèrer l'emplacement des objets sur ce terrain. Ce travail est dans le cadre du module mondes virtuels de la formation GAMAGORA.</p>
 <br><br>
 </div>
 <div>
