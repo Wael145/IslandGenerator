@@ -27,8 +27,10 @@ public class DisplayMap : MonoBehaviour
     public int seed;
     public Vector2 offset;
     public float perlinScale;
-    private float treeDensityMultiplier = 1f;
-    private float rockDensityMultiplier = 1f;
+    public bool useFalloff;
+    public float[,] falloffMap;
+    public float treeDensityMultiplier = 1f;
+    public float rockDensityMultiplier = 1f;
     private List<Vector3> vertices;
     private float[,] treeNoiseMap;
     private float[,] usedMap;
@@ -36,6 +38,13 @@ public class DisplayMap : MonoBehaviour
     public TerrainType[] regions;
     private List<Vector3> occupiedPositions;
     private float treeSize = 0.2f;
+
+    private void Awake()
+    {
+        if (height != width)
+            width = height;
+        falloffMap = FallOffGenerator.GenerateFalloffMap(height);
+    }
     private void Start()
     {
         occupiedPositions = new List<Vector3>();
@@ -73,6 +82,8 @@ public class DisplayMap : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
+                if (useFalloff)
+                    noiseMap[i, j] = noiseMap[i, j] - falloffMap[i, j];
                 float currentHeight = noiseMap[i, j];
                 
                 for (int terrainType = 0; terrainType < regions.Length; terrainType++)
