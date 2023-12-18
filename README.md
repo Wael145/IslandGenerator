@@ -14,7 +14,7 @@
     <br><br>
 </div>
 <div>
-  <h3>Terrain Generation :<h3>
+  <h3>Terrain Generation :</h3>
     <br><br>
 </div>
 <div>
@@ -22,7 +22,7 @@
    
 
 </div>
-![Capture d'écran 2023-12-18 053850](https://github.com/Wael145/IslandGenerator/assets/62157910/4c857340-0283-43d7-b567-e9b1dd4a86ed)
+<img src="![Capture d'écran 2023-12-18 053850](https://github.com/Wael145/IslandGenerator/assets/62157910/4c857340-0283-43d7-b567-e9b1dd4a86ed)">
 <div>
   <h3>How to run</h3>
 <p>Version Unity : LTS Release 2022.3.* (Long-term support)
