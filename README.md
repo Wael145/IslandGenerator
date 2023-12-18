@@ -35,6 +35,13 @@ La hauteur du terrain = noiseMap[i,j] et 0<hauteur<1
 -Les rochers sont placés uniquement sur la hauteur moyenne du terrain(hauteur >= 0.65 && hauteur < 0.8)
 
 -Les plantes sont placées dans les parties vertes du terrain(hauteur<0.6)
+
+-On ne peut pas positionner des objets sur l'eau et sur les sable
+
+-Nous pouvons résumer les méthodes utilisées pour chaque objet par le diagramme suivant : 
+
+<img src="https://github.com/Wael145/IslandGenerator/assets/62157910/82c9780f-7d49-43d5-a83c-c6d272838628">
+
 <div>
   <h3>How to run</h3>
 <p>Version Unity : LTS Release 2022.3.* (Long-term support)
