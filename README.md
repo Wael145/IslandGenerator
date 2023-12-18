@@ -24,12 +24,12 @@
 <div>
   <h3>How to run</h3>
 <p>Version Unity : LTS Release 2022.3.* (Long-term support)
+	
 Ouvrir git bash et écrire :
 	
 	git clone https://github.com/Wael145/IslandGenerator.git
 Ou simplement télécharger le projet en archive.
 </p>
-	
     <br><br>
 </div>
 <div>
