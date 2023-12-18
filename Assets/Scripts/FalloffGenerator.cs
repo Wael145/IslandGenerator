@@ -33,4 +33,28 @@ public static class FallOffGenerator
 
         return value_powered / (value_powered + Mathf.Pow((b - b * value), a));
     }
+
+    public static float[,] GenerateRadialGradientMap(int size)
+    {
+        float[,] gradientRadialMap = new float[size, size];
+
+        Vector2 centerPoint = new Vector2(size / 2, size / 2);
+        float maxDistance = 5f;
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                float x = i / (float)size * 2 - 1;
+                float y = j / (float)size * 2 - 1;
+                Vector2 point = new Vector2(i, j);
+                float value = 1f;
+                if ((centerPoint - point).magnitude < maxDistance)
+                    value = (centerPoint - point).magnitude / maxDistance;
+
+                gradientRadialMap[i, j] = 1 - value;
+            }
+        }
+
+        return gradientRadialMap;
+    }
 }

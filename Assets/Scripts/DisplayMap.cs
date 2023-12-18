@@ -37,6 +37,7 @@ public class DisplayMap : MonoBehaviour
     public float rockDensityMultiplier = 1.0f;
     public float rockDensity = 0.8f;
     public float foliageDensityMultiplier = 10.0f;
+    public float[,] volcanoMap;
     private List<Vector3> vertices;
     private float[,] treeNoiseMap;
     private float[,] usedMap;
@@ -50,6 +51,7 @@ public class DisplayMap : MonoBehaviour
         if (height != width)
             width = height;
         falloffMap = FallOffGenerator.GenerateFalloffMap(height);
+        volcanoMap = FallOffGenerator.GenerateRadialGradientMap(height);
     }
     private void Start()
     {
@@ -63,7 +65,7 @@ public class DisplayMap : MonoBehaviour
 
     private void Update()
     {
-         GenerateMap();
+         //GenerateMap();
     }
     public void UpdatePlacement()
     {
