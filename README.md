@@ -25,6 +25,13 @@
 
 </div>
 <img src="https://github.com/Wael145/IslandGenerator/assets/62157910/4c857340-0283-43d7-b567-e9b1dd4a86ed">
+Le placement des objets est géré par un bruit de perlin pour calculer la densité initiale, ensuite par un multiplicateur correspondant à la hauteur du terrain.
+
+-Le nombre d'arbres est plus grand quand la heuteur est minimale, et plus petit dans le cas contraire, (jusqu'à 0 arbres sur la neige).
+
+-Les rochers sont placés uniquement sur la hauteur moyenne du terrain(hauteur >= 0.65 && hauteur < 0.8)
+
+-Les plantes sont placées dans les parties vertes du terrain(hauteur<0.6)
 <div>
   <h3>How to run</h3>
 <p>Version Unity : LTS Release 2022.3.* (Long-term support)
