@@ -11,9 +11,9 @@
 <div>
   lien des slides :
 	https://docs.google.com/presentation/d/1tQceaV6BTEazL69P0cvXhuQOGixocn1JxH6T-lcDPy4/edit#slide=id.p
-  lien de la vidéo : 
 	
-    <br><br>
+  lien de la vidéo : 
+
 </div>
 <div>
   <h3>Terrain Generation :</h3>
