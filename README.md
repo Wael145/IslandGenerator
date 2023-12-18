@@ -22,10 +22,10 @@
     <br><br>
 </div>
 <div>
-<h3>Réferences :<h3>
+<h3>Réferences :</h3>
 -Procedural Landmass Generation
 https://www.youtube.com/watch?v=wbpMiKiSKm8
-<h3>Assets :<h3>
+<h3>Assets :</h3>
 <p>
 	-Trees : https://assetstore.unity.com/packages/3d/vegetation/trees/low-poly-tree-pack-57866
 	<br>
