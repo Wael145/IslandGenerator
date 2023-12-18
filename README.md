@@ -18,11 +18,12 @@
 <div>
   <h3>Terrain Generation :</h3>
     <br><br>
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/0546fa90-8d28-4820-bef7-302cb70b4263">
 </div>
 <div>
   <h3>Objects Placement :</h3>
    
-< img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/0546fa90-8d28-4820-bef7-302cb70b4263">
+
 
 </div>
 Le placement des objets est géré par un bruit de perlin pour calculer la densité initiale, ensuite par un multiplicateur correspondant à la hauteur du terrain.
