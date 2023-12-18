@@ -10,7 +10,7 @@
 </div>
 <div>
   <h3>lien des slides :<h3>
-	<a href="https://docs.google.com/presentation/d/1tQceaV6BTEazL69P0cvXhuQOGixocn1JxH6T-lcDPy4/edit#slide=id.p"></a>  
+	<a href="https://docs.google.com/presentation/d/1tQceaV6BTEazL69P0cvXhuQOGixocn1JxH6T-lcDPy4/edit#slide=id.p"> 
     <br><br>
 </div>
 <div>
