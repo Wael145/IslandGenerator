@@ -19,7 +19,8 @@
 </div>
 <div>
   <h3>Objects Placement :<h3>
-    <br><br>
+    ![Capture d'écran 2023-12-18 053850](https://github.com/Wael145/IslandGenerator/assets/62157910/1065d8c9-1df9-425c-9dbf-46ebde9b223d)
+
 </div>
 <div>
   <h3>How to run</h3>
