@@ -9,6 +9,11 @@
 <p>La génération procédurale de terrains(les iles dans notre cas) est une approche qui sert à créer des environnements variés,qui sont généralement plus difficile à faire sans code. Elle permet aussi de gagner du temps dans le processus de conception. On a trouvé pas mal de travaux qui générent des iles procéduralement, on s’est inspriré de quelques uns pour faire notre propre travail.</p>
 </div>
 <div>
+  <h3>lien des slides :<h3>
+	<a href="https://docs.google.com/presentation/d/1tQceaV6BTEazL69P0cvXhuQOGixocn1JxH6T-lcDPy4/edit#slide=id.p"></a>  
+    <br><br>
+</div>
+<div>
   <h3>Terrain Generation :<h3>
     <br><br>
 </div>
