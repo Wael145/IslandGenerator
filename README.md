@@ -19,7 +19,7 @@
 </div>
 <div>
   <h3>Objects Placement :<h3>
-    <img src="https://github.com/Wael145/IslandGenerator/assets/62157910/1065d8c9-1df9-425c-9dbf-46ebde9b223d)">
+    <img src="![Capture d'écran 2023-12-18 053850](https://github.com/Wael145/IslandGenerator/assets/62157910/cfcdb703-5cb8-4baf-b3bc-5a0aca3ff1f2)">
 
 </div>
 <div>
