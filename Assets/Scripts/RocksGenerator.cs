@@ -19,7 +19,7 @@ public class RocksGenerator : MonoBehaviour
     {
 
     }
-
+    //spawn rocks
     public static void GenerateRocks(List<Vector3> vertices)
     {
             foreach(Vector3 vertice in vertices) { 

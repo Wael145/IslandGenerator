@@ -21,10 +21,9 @@ public class TreesGenerator : MonoBehaviour
     {
  
     }
-
+    //fonction pour spawn les arbres
     public static void GenerateTrees(List<Vector3> vertices)
-    {
-        
+    { 
        foreach(var vertice in vertices) { 
 
             if(vertice != Vector3.zero) 

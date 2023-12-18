@@ -67,6 +67,7 @@ public class DisplayMap : MonoBehaviour
     {
          //GenerateMap();
     }
+    //update si on clique si le bouton update placement
     public void UpdatePlacement()
     {
         DestroyAllObjects("Tree");
@@ -115,6 +116,7 @@ public class DisplayMap : MonoBehaviour
         GetComponent<MeshRenderer>().material.mainTexture = noiseTexture;
     }
 //----------------------------------------trees--------------------------------------------------------------
+    //placer les arbres
     private void PlaceTrees()
     {
         Dictionary<float, List<Vector3>> treesByHeight = new Dictionary<float, List<Vector3>>();
@@ -123,9 +125,10 @@ public class DisplayMap : MonoBehaviour
             for (int j = 0; j < height-1; j++)
             {
                 level = PerlinNoise.GetLevel(usedMap, i, j);
-
+                //si non water
                 if (!PerlinNoise.isWater(usedMap, i, j))
                 {
+                    //densité
                     float treeDensity = CalculateTreeDensity(level);
 
                     if (level > 0.45 && level <= 0.65)
@@ -140,10 +143,11 @@ public class DisplayMap : MonoBehaviour
                     {
                         treeDensityMultiplier = level3TreeDensity; 
                     }
+                    //multiplier selon hauteur
                     treeDensity *= treeDensityMultiplier;
                     Vector3 treePosition = vertices[j * width + i];
                     if (Random.Range(0f, 1f) < treeDensity)
-                    {
+                    {//check for collision
                         if (!IsObjectPosFull(treePosition,treeSize) && !IsCollision(treePosition,treeSize))
                         {
                             if (!treesByHeight.ContainsKey(level))
@@ -167,6 +171,7 @@ public class DisplayMap : MonoBehaviour
             GenerateTrees(tree.Value);
         }
     }
+    //fonction pour detecter la collision
     private bool IsCollision(Vector3 objectPosition, float size)
     {
         foreach (Vector3 existingObjectPosition in occupiedPositions)
@@ -178,12 +183,14 @@ public class DisplayMap : MonoBehaviour
         }
         return false; 
     }
+    //fonction pour generer les arbres
     private void GenerateTrees(List<Vector3> treePositions)
     {
         int numberOfTrees = Mathf.Max(treePositions.Count, 1);
         List<Vector3> selectedTreePositions = GetRandomList(treePositions, numberOfTrees);
         TreesGenerator.GenerateTrees(selectedTreePositions);
     }
+    // Randomize
     private List<T> GetRandomList<T>(List<T> listTrees, int count)
     {
         List<T> list = new List<T>();
@@ -195,11 +202,13 @@ public class DisplayMap : MonoBehaviour
         }
         return list;
     }
+    //tree density
     private float CalculateTreeDensity(float terrainHeight)
     {
         return Mathf.PerlinNoise(terrainHeight * treeDensityMultiplier, 0);
     }
     //----------------------------------------rocks--------------------------------------------------------------
+    //placer les rochers
     private void PlaceRocks()
     {
         Dictionary<float, List<Vector3>> rocksByHeight = new Dictionary<float, List<Vector3>>();
@@ -209,7 +218,7 @@ public class DisplayMap : MonoBehaviour
             for (int j = 0; j < height-1; j++)
             {
                 level = PerlinNoise.GetLevel(usedMap, i, j);
-
+                //if non water
                 if (!PerlinNoise.isWater(usedMap, i, j))
                 {
                     float rockDensity = CalculateRockDensity(level);
@@ -243,10 +252,12 @@ public class DisplayMap : MonoBehaviour
             GenerateRocks(pos.Value);
         }
     }
+    //spawn rocks
     private void GenerateRocks(List<Vector3> rockPositions)
     {
         RocksGenerator.GenerateRocks(rockPositions);
     }
+    //density by level
     private float RockDensity(float terrainLevel)
     {
         if (terrainLevel >= 0.65 && terrainLevel < 0.8)
@@ -260,6 +271,7 @@ public class DisplayMap : MonoBehaviour
         return Mathf.PerlinNoise(terrainHeight * rockDensityMultiplier, 0);
     }
  //-------------------------------------------Grass--------------------------------------------------------------------
+    //grass density
     private float GrassDensity(float terrainLevel)
     {
         if (terrainLevel < 0.6 )
@@ -268,6 +280,7 @@ public class DisplayMap : MonoBehaviour
         }
         return 0.0f;
     }
+    //place grass
     public void PlaceGrass()
     {
         Dictionary<float, List<Vector3>> grassByHeight = new Dictionary<float, List<Vector3>>();
@@ -277,6 +290,7 @@ public class DisplayMap : MonoBehaviour
             for (int j = 0; j < height - 1; j++)
             {
                 level = PerlinNoise.GetLevel(usedMap, i, j);
+                //if not water
                 if (!PerlinNoise.isWater(usedMap, i, j))
                 {
                     float grassDensity = 1f;
@@ -312,16 +326,17 @@ public class DisplayMap : MonoBehaviour
         GrassFoliage.GenerateFoliage(grassPositions);
     }
     //-------------------------------------------Used by all--------------------------------------------------------------------
+    //doublons
     private bool IsFull(Vector3 position)
     {
         return occupiedPositions.Contains(position);
     }
-
+    //update vertices
     private void UpdatePreviousVertices()
     {
         vertices = GetComponent<MeshFilter>().mesh.vertices.ToList();
     }
-
+    //marquer comme occupé
     private void MarkAsFull(Vector3 position, float size)
     {
         float radius = size / 2.0f;
@@ -334,7 +349,7 @@ public class DisplayMap : MonoBehaviour
             }
         }
     }
-
+    //is full position
     private bool IsObjectPosFull(Vector3 position, float size)
     {
         foreach (Vector3 pos in occupiedPositions)
@@ -346,6 +361,7 @@ public class DisplayMap : MonoBehaviour
         }
         return false;
     }
+    //detruire tout les objets
     private void DestroyAllObjects(string tag)
     {
         GameObject[] cloned = GameObject.FindGameObjectsWithTag(tag);
