@@ -28,7 +28,7 @@
 Ouvrir git bash et écrire :
 	
 	git clone https://github.com/Wael145/IslandGenerator.git
-Ou simplement télécharger le projet en archive.
+Ou simplement télécharger le projet en archive et extraire les fichiers.
 </p>
 </div>
 <div>
