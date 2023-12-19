@@ -57,6 +57,17 @@ Ou simplement télécharger le projet en archive et extraire les fichiers.
 
 <h3>Tips</h3>
 il faut modifier les valeurs des densités avant de lancer le play mode.Elle ne se modifient pas en temps réel.
+
+Sachant que  :
+
+La hauteur est entre 0 et 1.
+
+Level1TreeDensity veut dire que 0.45<hauteur<=0.6
+
+Level2TreeDensity veut dire que 0.6<hauteur<8
+
+Level3TreeDensity veut dire que 0.8<=hauteur
+
 <img src="https://github.com/Wael145/IslandGenerator/assets/62157910/ce81eb15-5d30-4650-b508-8adda0c09c5d">
 
 Si le terrain a été modifier vous pouvez replacer tout les objets en cliquant sur le bouton Update Placement
