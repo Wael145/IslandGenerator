@@ -127,12 +127,12 @@ public class DisplayMap : MonoBehaviour
             for (int j = 0; j < height-1; j++)
             {
                 level = PerlinNoise.GetLevel(usedMap, i, j);
-                //si non water
+                // Récupère la hauteur et vérifie s'il n'est pas de l'eau
                 if (!PerlinNoise.isWater(usedMap, i, j))
                 {
-                    //densité
+                    // Calcule la densité des arbres
                     float treeDensity = CalculateTreeDensity(level);
-
+                    // Ajuste la densité en fonction du niveau de terrain
                     if (level > 0.45 && level <= 0.6)
                     {
                         treeDensity *= dens1;
@@ -145,11 +145,14 @@ public class DisplayMap : MonoBehaviour
                     {   
                         treeDensity *= dens3; 
                     }
+                    // Récupère la position du sommet correspondant
                     Vector3 treePosition = vertices[j * width + i];
+                    // Vérifie s'il faut placer un arbre à cette position
                     if (Random.Range(0f, 1f) < treeDensity)
                     {//check for collision
                         if (!IsObjectPosFull(treePosition,treeSize) && !IsCollision(treePosition,treeSize))
                         {
+                            // Ajoute la position à la liste des positions occupées
                             if (!treesByHeight.ContainsKey(level))
                             {
                                 treesByHeight[level] = new List<Vector3>();
@@ -160,7 +163,7 @@ public class DisplayMap : MonoBehaviour
                     }
                 }
                 else
-                {
+                {// Si c'est de l'eau
                     vertices[j * width + i] = Vector3.zero;
                 }
             }
