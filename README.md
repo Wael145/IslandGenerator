@@ -2,7 +2,7 @@
 ![370294914_204744886047728_8815547702196559059_n](https://github.com/Wael145/IslandGenerator/assets/62157910/e5b1c8e4-17b7-48fb-8050-08ce3743572d)
 
 <div>
-<h1>Island Procedural generation with unity</h1>	
+<h1>Mondes Virtuels : Island Procedural generation with unity</h1>	
 Il s'agit de la génération procédurale d'une île et gèrer l'emplacement des objets(plantes, pierres et arbres) sur ce terrain. Ce travail est dans le cadre du module mondes virtuels de la formation GAMAGORA.
 
 <p>La génération procédurale de terrains(les îles dans notre cas) est une approche qui sert à créer des environnements variés,qui sont généralement plus difficile à faire sans code. Elle permet aussi de gagner du temps dans le processus de conception. On a trouvé pas mal de travaux qui générent des terrains procéduralement, on s’est inspriré de quelques uns pour faire notre propre travail.</p>
