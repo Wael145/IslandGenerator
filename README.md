@@ -46,7 +46,7 @@ La hauteur du terrain = noiseMap[i,j] et 0<hauteur<1
 
 -Exemple de code pour le placement d'arbres : 
 
-<img src="https://github.com/Wael145/IslandGenerator/assets/62157910/691c91f6-f164-4661-8263-601df9983f73">
+<img src="https://github.com/Wael145/IslandGenerator/assets/62157910/2d0aa3af-a3d1-4f5b-b29a-956d49205f96">
 <div>
   <h3>How to run</h3>
 <p>Version Unity : LTS Release 2022.3.* (Long-term support)
