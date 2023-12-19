@@ -44,6 +44,7 @@ La hauteur du terrain = noiseMap[i,j] et 0<hauteur<1
 
 <img src="https://github.com/Wael145/IslandGenerator/assets/62157910/d64815e6-9be1-43e7-a69b-f4b4f9a65595">
 
+
 <div>
   <h3>How to run</h3>
 <p>Version Unity : LTS Release 2022.3.* (Long-term support)
@@ -51,7 +52,14 @@ La hauteur du terrain = noiseMap[i,j] et 0<hauteur<1
 Ouvrir git bash et écrire :
 	
 	git clone https://github.com/Wael145/IslandGenerator.git
-Ou simplement télécharger le projet en archive et extraire les fichiers.
+Ou simplement télécharger le projet en archive et extraire les fichiers. 
+
+<h3>Tips</h3>
+il faut modifier les valeurs des densités avant de lancer le play mode.Elle ne se modifient pas en temps réel.
+<img src="https://github.com/Wael145/IslandGenerator/assets/62157910/ce81eb15-5d30-4650-b508-8adda0c09c5d">
+
+Si le terrain a été modifier vous pouvez replacer tout les objets en cliquant sur le bouton Update Placement
+<img src="https://github.com/Wael145/IslandGenerator/assets/62157910/20817b2a-19e2-443f-8733-c80cc51d0465">
 </p>
 </div>
 <div>
