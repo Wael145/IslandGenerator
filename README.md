@@ -42,7 +42,7 @@ La hauteur du terrain = noiseMap[i,j] et 0<hauteur<1
 
 -Nous pouvons résumer les méthodes utilisées pour chaque objet par le diagramme suivant : 
 
-<img src="https://github.com/Wael145/IslandGenerator/assets/62157910/82c9780f-7d49-43d5-a83c-c6d272838628">
+<img src="https://github.com/Wael145/IslandGenerator/assets/62157910/d64815e6-9be1-43e7-a69b-f4b4f9a65595">
 
 <div>
   <h3>How to run</h3>
