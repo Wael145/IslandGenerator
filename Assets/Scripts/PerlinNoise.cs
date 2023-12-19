@@ -85,7 +85,6 @@ public class PerlinNoise
         noiseTexture.Apply();
         return noiseTexture;
     }
-
     public static Texture2D PerlinColorTexture(Color[] colorMap, int width, int height)
     {
         Texture2D noiseTexture = new Texture2D(height, width);
@@ -98,6 +97,7 @@ public class PerlinNoise
 
         return noiseTexture;
     }
+    //verifier si c'est de l'eau
     public static bool isWater(float[,] noiseMap, int i, int j)
     { 
         if (noiseMap[i, j] < 0.45)
@@ -106,6 +106,7 @@ public class PerlinNoise
         }
         return false;
     }
+    //Get level
     public static float GetLevel(float[,] noiseMap, int i, int j)
     {
         return noiseMap[i,j];

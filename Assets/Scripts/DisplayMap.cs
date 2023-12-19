@@ -29,14 +29,14 @@ public class DisplayMap : MonoBehaviour
     public float perlinScale;
     public bool useFalloff;
     public float[,] falloffMap;
-    public float treeDensityMultiplier = 1.0f;
+    private float treeDensityMultiplier = 1.0f;
     public float level1TreeDensity=0.8f;
-    public float level2TreeDensity=0.5f; 
+    public float level2TreeDensity=0.5f;
     public float level3TreeDensity=0.0f;
-    [Range(0, 1)]
-    public float rockDensityMultiplier = 1.0f;
+    private float rockDensityMultiplier = 1.0f;
     public float rockDensity = 0.8f;
-    public float foliageDensityMultiplier = 10.0f;
+    [Range(0, 1)]
+    public float foliageDensityMultiplier = 0.5f;
     public float[,] volcanoMap;
     private List<Vector3> vertices;
     private float[,] treeNoiseMap;
@@ -58,15 +58,16 @@ public class DisplayMap : MonoBehaviour
         occupiedPositions = new List<Vector3>();
         vertices = new List<Vector3>();
         GenerateMap();
-        PlaceTrees();
+        PlaceTrees(level1TreeDensity, level2TreeDensity, level3TreeDensity);
         PlaceRocks();
         PlaceGrass();
     }
 
     private void Update()
     {
-         //GenerateMap();
+        GenerateMap();
     }
+ 
     //update si on clique si le bouton update placement
     public void UpdatePlacement()
     {
@@ -74,7 +75,7 @@ public class DisplayMap : MonoBehaviour
         DestroyAllObjects("Grass");
         DestroyAllObjects("Rock");
         UpdatePreviousVertices();
-        PlaceTrees();
+        PlaceTrees(level1TreeDensity, level2TreeDensity, level3TreeDensity);
         PlaceRocks();
         PlaceGrass();
         
@@ -117,8 +118,9 @@ public class DisplayMap : MonoBehaviour
     }
 //----------------------------------------trees--------------------------------------------------------------
     //placer les arbres
-    private void PlaceTrees()
+    private void PlaceTrees(float dens1,float dens2,float dens3)
     {
+        // Dictionnaire pour stocker les positions des arbres en fonction de leur hauteur
         Dictionary<float, List<Vector3>> treesByHeight = new Dictionary<float, List<Vector3>>();
         for (int i = 0; i < width-1; i++)
         {
@@ -131,20 +133,18 @@ public class DisplayMap : MonoBehaviour
                     //densité
                     float treeDensity = CalculateTreeDensity(level);
 
-                    if (level > 0.45 && level <= 0.65)
+                    if (level > 0.45 && level <= 0.6)
                     {
-                        treeDensityMultiplier = level1TreeDensity;
+                        treeDensity *= dens1;
                     }
-                    else if (level > 0.65 && level < 0.8)
+                    else if (level > 0.6 && level < 0.8)
                     {
-                        treeDensityMultiplier = level2TreeDensity; 
+                        treeDensity *= dens2; 
                     }
                     else if (level >= 0.8)
-                    {
-                        treeDensityMultiplier = level3TreeDensity; 
+                    {   
+                        treeDensity *= dens3; 
                     }
-                    //multiplier selon hauteur
-                    treeDensity *= treeDensityMultiplier;
                     Vector3 treePosition = vertices[j * width + i];
                     if (Random.Range(0f, 1f) < treeDensity)
                     {//check for collision
@@ -165,7 +165,7 @@ public class DisplayMap : MonoBehaviour
                 }
             }
         }
-
+        // Génère les arbres en fonction de leur hauteur
         foreach (var tree in treesByHeight)
         {
             GenerateTrees(tree.Value);
@@ -211,6 +211,7 @@ public class DisplayMap : MonoBehaviour
     //placer les rochers
     private void PlaceRocks()
     {
+        // Dictionnaire pour stocker les positions des rochers en fonction de leur hauteur
         Dictionary<float, List<Vector3>> rocksByHeight = new Dictionary<float, List<Vector3>>();
 
         for (int i = 0; i < width-1; i++)
@@ -227,6 +228,7 @@ public class DisplayMap : MonoBehaviour
                     rockDensity *= RockDensity(level);
 
                     Vector3 rockPosition = vertices[j * width + i];
+                    // Vérifie s'il faut placer un rocher à cette position
                     if (Random.Range(0f, 1f) < rockDensity)
                     {
                         if (!IsFull(rockPosition) && !IsCollision(rockPosition, 0.1f))
@@ -246,7 +248,7 @@ public class DisplayMap : MonoBehaviour
                 }
             }
         }
-
+        // Génère les rochers en fonction de leur hauteur
         foreach (var pos in rocksByHeight)
         {
             GenerateRocks(pos.Value);
@@ -283,6 +285,7 @@ public class DisplayMap : MonoBehaviour
     //place grass
     public void PlaceGrass()
     {
+        // Dictionnaire pour stocker les positions de l'herbe en fonction de leur hauteur
         Dictionary<float, List<Vector3>> grassByHeight = new Dictionary<float, List<Vector3>>();
 
         for (int i = 0; i < width - 1; i++)
@@ -315,7 +318,7 @@ public class DisplayMap : MonoBehaviour
                 }
             }
         }
-
+        // Génère l'herbe en fonction de sa hauteur
         foreach (var pos in grassByHeight)
         {
             GenerateGrass(pos.Value);

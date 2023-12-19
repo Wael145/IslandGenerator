@@ -16,7 +16,7 @@ public class GrassFoliage : MonoBehaviour
     {
 
     }
-    //spawn foliage
+    //spawn plantes
     public static void GenerateFoliage(List<Vector3> vertices)
     {
          Vector3 vertice = vertices[Random.Range(0, vertices.Count)];
