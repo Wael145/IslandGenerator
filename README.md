@@ -20,8 +20,10 @@ Il s'agit de la génération procédurale d'une île et gèrer l'emplacement des
 La génération procédurale de terrains peut être réalisée à l'aide de nombreux algorithmes. Le choix a été fait ici d'utiliser l'algorithme du bruit de Perlin afin de générer un terrain en 3 dimensions. L'avantage du bruit de Perlin est qu'il permet de générer une grille de valeurs continues, ce qui est très pratique pour ensuite générer un terrain cohérent. 
 <br><br>
 
-La première étape a donc été de générer une texture 2D sur Unity. Pour cela, on crée un tableau à deux dimensions et chaque case du tableau contiendra un nombre flottant entre 0 et 1. A partir de ce tableau, on peut générer une texture en deux dimensions. 
+La première étape a donc été de générer une texture 2D sur Unity. Pour cela, on crée un tableau à deux dimensions et chaque case du tableau contiendra un nombre flottant entre 0 et 1 calculé à l'aide de la fonction PerlinNoise de Unity. A partir de ce tableau, on peut générer une texture en deux dimensions en nuances de gris en associant à chaque point du tableau une couleur grise proportionnelle à la valeur en sortie de la fonction PerlinNoise.
 <img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/0546fa90-8d28-4820-bef7-302cb70b4263">
+<em>Texture PerlinNoise en 2D (noir et blanc) </em>
+
 </div>
 
 <div>
