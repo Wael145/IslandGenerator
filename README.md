@@ -32,6 +32,7 @@ Nous avons donc à disposition une texture en deux dimensions issu d'un tableau 
 
 Ces régions indiquent que pour une hauteur entre 0 et 0.3, la couleur affichée sera du bleu foncé, puis entre 0.3 et 0.4 ce sera du bleu un peu plus clair etc. On peut changer chaque couleur dans l'inspecteur, ajouter de nouvelles régions ou en supprimer et changer les valeurs des hauteurs minimum et maximum.
 Cela permet d'obtenir une image comme cela.
+
 <img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/448d0c0b-d5f5-492c-8a9d-74327ffec0c9" width = 200>
 
 
@@ -40,11 +41,11 @@ On peut ensuite complexifier le code du bruit de Perlin afin d'ajouter divers pa
 <img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/b188c61a-26c2-4b88-93d9-43e925b9cd4f" width = 200>
 
 <div>
-<h1>Création du maillage :</h1>
+<h4>Création du maillage :</h4>
 
 Après avoir obtenu une texture satisfaisante en couleurs, on peut générer le maillage de montagnes assez simplement. Pour cela il suffit de créer un plan en 2D de la même taille que la texture, et à chaque sommet du maillage, on lui donne une hauteur proportionnelle à la valeur du bruit de Perlin en ce point. On peut ensuite appliquer la texture créée précédemment sur le maillage pour obtenir le rendu suivant : 
 
-<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/309699ac-ef88-4e82-8ddc-6bf96f3ce887" width = 300> <img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/97386c42-1e95-4699-a2be-3204d6f1bf8d" width = 300>
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/309699ac-ef88-4e82-8ddc-6bf96f3ce887" width = 500> <img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/97386c42-1e95-4699-a2be-3204d6f1bf8d" width = 500>
 
 
 
