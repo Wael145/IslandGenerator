@@ -22,10 +22,20 @@ La génération procédurale de terrains peut être réalisée à l'aide de nomb
 
 La première étape a donc été de générer une texture 2D sur Unity. Pour cela, on crée un tableau à deux dimensions et chaque case du tableau contiendra un nombre flottant entre 0 et 1 calculé à l'aide de la fonction PerlinNoise de Unity. A partir de ce tableau, on peut générer une texture en deux dimensions en nuances de gris en associant à chaque point du tableau une couleur grise proportionnelle à la valeur en sortie de la fonction PerlinNoise.
 
-<p>
-<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/0546fa90-8d28-4820-bef7-302cb70b4263">
-<em>Texture PerlinNoise en 2D (noir et blanc) </em>
-</p>
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/0546fa90-8d28-4820-bef7-302cb70b4263" alt = "Texture 2D en nuances de gris" width = 200>
+
+
+Nous avons donc à disposition une texture en deux dimensions issu d'un tableau à deux entrées. On veut alors obtenir une texture en couleurs. Pour cela, on associe à chaque valeur du tableau une couleur. On peut modifier ces plages de valeur dans l'inspecteur de Unity. Un exemple de valeurs qu'on utilise pour par exemple obtenir la texture d'un terrain avec des étendues d'eau et des montagnes :
+
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/3295bb69-e4a6-419e-a40e-c685c7ee4727">
+Ces régions indiquent que par exemple pour une hauteur entre 0 et 0.3, la couleur affichée sera du bleu foncé, puis entre 0.3 et 0.4 ce sera du bleu un peu plus clair etc. On peut changer chaque couleur dans l'inspecteur, ajouter de nouvelles régions ou en supprimer et changer les valeurs des hauteurs minimum et maximum.
+
+Cela permet d'obtenir une image comme cela.
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/448d0c0b-d5f5-492c-8a9d-74327ffec0c9">
+
+On peut ensuite complexifier le code du bruit de Perlin afin d'ajouter divers paramètres pour avoir une carte avec plus de substance et qui semble plus naturelle. On a alors des paramètres en plus dans l'inspecteur que l'on peut faire varier : le nombre d'octaves, la persistance et la lacunarité. Ces trois paramètres vont en quelque sorte rajouter un bruit par dessus le bruit de Perlin initial et cela donne le résultat suivant : on voit que les plages des îles ont des formes plus naturelles.
+
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/b188c61a-26c2-4b88-93d9-43e925b9cd4f">
 
 </div>
 
