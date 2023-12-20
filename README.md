@@ -44,7 +44,7 @@ On peut ensuite complexifier le code du bruit de Perlin afin d'ajouter divers pa
 
 Après avoir obtenu une texture satisfaisante en couleurs, on peut générer le maillage de montagnes assez simplement. Pour cela il suffit de créer un plan en 2D de la même taille que la texture, et à chaque sommet du maillage, on lui donne une hauteur proportionnelle à la valeur du bruit de Perlin en ce point. On peut ensuite appliquer la texture créée précédemment sur le maillage pour obtenir le rendu suivant : 
 
-<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/309699ac-ef88-4e82-8ddc-6bf96f3ce887" width = 300> <img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/97386c42-1e95-4699-a2be-3204d6f1bf8d", width = 300>
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/309699ac-ef88-4e82-8ddc-6bf96f3ce887" width = 300> <img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/97386c42-1e95-4699-a2be-3204d6f1bf8d" width = 300>
 
 
 
