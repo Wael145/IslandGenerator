@@ -21,8 +21,11 @@ La génération procédurale de terrains peut être réalisée à l'aide de nomb
 <br><br>
 
 La première étape a donc été de générer une texture 2D sur Unity. Pour cela, on crée un tableau à deux dimensions et chaque case du tableau contiendra un nombre flottant entre 0 et 1 calculé à l'aide de la fonction PerlinNoise de Unity. A partir de ce tableau, on peut générer une texture en deux dimensions en nuances de gris en associant à chaque point du tableau une couleur grise proportionnelle à la valeur en sortie de la fonction PerlinNoise.
+
+<p>
 <img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/0546fa90-8d28-4820-bef7-302cb70b4263">
 <em>Texture PerlinNoise en 2D (noir et blanc) </em>
+</p>
 
 </div>
 
