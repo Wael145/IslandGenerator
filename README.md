@@ -64,7 +64,7 @@ La dernière étape consiste à créer l'île en ajoutant de l'eau sur les bords
 
 <img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/cb88526c-4572-4484-9707-f6f95558d40a" width = 200> 
 
-On soustrait à chaque valeur du tableau du bruit de Perlin, le bruit du deuxième tableau et on seuille les valeurs pour qu'elles restent entre 0 et 1. Tout cela permet d'obtenir une carte de la même taille que précédemment et pour laquelle les bords ont toute une hauteur de 0 et les hauteurs proches du centre sont peu changées d'autre part. Ainsi on obtient bien une île et l'utilisation d'une carte générée par une fonction mathématique continue permet en fait de garder une continuité sur le maillage obtenu au final.
+On soustrait à chaque valeur du tableau du bruit de Perlin, le bruit du deuxième tableau et on seuille les valeurs pour qu'elles restent entre 0 et 1. Tout cela permet d'obtenir une carte de la même taille que précédemment et pour laquelle les sommets proches des bords ont toute une hauteur de 0 et les sommets proches du centre ont une hauteur peu changée. Ainsi on obtient bien une île et l'utilisation d'une carte générée par une fonction mathématique continue permet en fait de garder une continuité sur le maillage obtenu au final.
 
 <img src ="https://github.com/Wael145/IslandGenerator/assets/144930233/51ac8908-0031-49eb-af4f-348cda08bef6" width = 400>
 
