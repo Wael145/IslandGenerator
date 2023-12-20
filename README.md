@@ -50,11 +50,11 @@ Après avoir obtenu une texture satisfaisante en couleurs, on peut générer le 
 
 On voit un premier problème lorsqu'on applique la texture directement sur le maillage : les étendues d'eau ne sont pas plates. C'est normal, et pour remédier à cela, on peut utiliser l'outil AnimationCurve d'Unity.
 
-<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/c8580c8d-fc43-48f3-8f49-18be06ac9435" width = 200>
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/c8580c8d-fc43-48f3-8f49-18be06ac9435" width = 400>
 
 Cette courbe peut être modifiée très facilement dans l'inspecteur et elle permet de définir une fonction mathématique de manière visuelle, cette fonction va associer à chaque valeur sur l'axe des x une nouvelle valeur sur l'axe des y. On va ensuite utiliser cette fonction dans l'algorithme qui génère le maillage du terrain afin de modifier les hauteurs des sommets. Sur la courbe précédente, on voit que les valeurs entre 0 et 0.4 vont toutes être ramenées à 0 pour pouvoir avoir des étendues d'eau planes. Après application on obtient : 
 
-<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/dc5794cb-d666-4c36-acfb-59b3182b3e88" width = 200> 
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/dc5794cb-d666-4c36-acfb-59b3182b3e88" width = 400> 
 </div>
 <div>
 	
