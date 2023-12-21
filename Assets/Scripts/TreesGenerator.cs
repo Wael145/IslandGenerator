@@ -16,11 +16,7 @@ public class TreesGenerator : MonoBehaviour
     {
         TreePrefabs_ = TreePrefabs;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
- 
-    }
+
     //fonction pour spawn les arbres
     public static void GenerateTrees(List<Vector3> vertices)
     { 
@@ -38,11 +34,5 @@ public class TreesGenerator : MonoBehaviour
             }
         }
 
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
-        
-    }
+    }    
 }

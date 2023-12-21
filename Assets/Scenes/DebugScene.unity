@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &304309124
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -266,8 +266,11 @@ MonoBehaviour:
   offset: {x: 0, y: 0}
   perlinScale: 5
   useFalloff: 1
-  treeDensityMultiplier: 0
-  rockDensityMultiplier: 0
+  level1TreeDensity: 0.8
+  level2TreeDensity: 0.5
+  level3TreeDensity: 0
+  rockDensity: 0.8
+  foliageDensityMultiplier: 0.5
   regions:
   - name: Water
     height: 0.2
@@ -613,8 +616,11 @@ MonoBehaviour:
   offset: {x: 0, y: 0}
   perlinScale: 10
   useFalloff: 0
-  treeDensityMultiplier: 0
-  rockDensityMultiplier: 0
+  level1TreeDensity: 0.8
+  level2TreeDensity: 0.5
+  level3TreeDensity: 0
+  rockDensity: 0.8
+  foliageDensityMultiplier: 0.5
   regions:
   - name: Water
     height: 0.3

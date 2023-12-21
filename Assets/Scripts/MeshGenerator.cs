@@ -5,25 +5,31 @@ using UnityEngine;
 public static class MeshGenerator
 {
     public static Vector3[] vertices;
+
+    // Génération du mesh de l'île, un paramètre permet de modifier le LOD de l'île 
     public static Mesh GenerateTerrainMesh(float[,] noiseMap, float meshHeightMultiplier, AnimationCurve meshHeightCurve, int invLod)
     {
         Mesh meshTerrain = new Mesh();
+
         int width = noiseMap.GetLength(0) / invLod;
         int height = noiseMap.GetLength(1) / invLod;
+
         vertices = new Vector3[width * height];
-        Vector2[] uvs = new Vector2[width * height];
-        Color[] colors = new Color[width * height];
         int[] triangles = new int[(width - 1) * (height - 1) * 6];
 
+        Vector2[] uvs = new Vector2[width * height];
+
             for (int j = 0; j < height; j++)
-            for (int i = 0; i < width; i++)
-            {
-                float jScaled = noiseMap.GetLength(1) * j / (float)(height - 1); // on veut aller jusqu'à la largeur L totale en n pas
-                float iScaled = noiseMap.GetLength(0) * i / (float)(width - 1) ;
-                vertices[j * width + i] = new Vector3(iScaled, meshHeightCurve.Evaluate(noiseMap[Mathf.Max((int)iScaled - 1, 0), Mathf.Max((int)jScaled - 1, 0)]) * meshHeightMultiplier, jScaled);
-                uvs[j * width + i] = new Vector2(i / (float)(width - 1), j / (float)(height - 1));
-                //colors[j * width + i] = ChooseColorFromHeight(noiseMap[iScaled, jScaled]);
-            }
+                for (int i = 0; i < width; i++)
+                {
+                    float jScaled = noiseMap.GetLength(1) * j / (float)(height - 1); 
+                    float iScaled = noiseMap.GetLength(0) * i / (float)(width - 1) ;
+
+                    // On modifie les hauteurs des sommets en appliquant la fonction donnée par l'AnimationCurve
+                    vertices[j * width + i] = new Vector3(iScaled, meshHeightCurve.Evaluate(noiseMap[Mathf.Max((int)iScaled - 1, 0), Mathf.Max((int)jScaled - 1, 0)]) * meshHeightMultiplier, jScaled);
+
+                    uvs[j * width + i] = new Vector2(i / (float)(width - 1), j / (float)(height - 1));
+                }
 
         int indexTriangle = 0;
         for (int j = 0; j < height - 1; j++)
@@ -42,7 +48,6 @@ public static class MeshGenerator
         meshTerrain.vertices = vertices;
         meshTerrain.triangles = triangles;
         meshTerrain.uv = uvs;
-        //meshTerrain.colors = colors;
         
         meshTerrain.RecalculateBounds();
         meshTerrain.RecalculateNormals();

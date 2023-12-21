@@ -46,13 +46,6 @@ public class DisplayMap : MonoBehaviour
     private List<Vector3> occupiedPositions;
     private float treeSize = 0.2f;
 
-    private void Awake()
-    {
-        if (height != width)
-            width = height;
-        falloffMap = FallOffGenerator.GenerateFalloffMap(height);
-        volcanoMap = FallOffGenerator.GenerateRadialGradientMap(height);
-    }
     private void Start()
     {
         occupiedPositions = new List<Vector3>();
@@ -65,7 +58,7 @@ public class DisplayMap : MonoBehaviour
 
     private void Update()
     {
-        GenerateMap();
+        //GenerateMap();
     }
  
     //update si on clique si le bouton update placement
@@ -78,24 +71,35 @@ public class DisplayMap : MonoBehaviour
         PlaceTrees(level1TreeDensity, level2TreeDensity, level3TreeDensity);
         PlaceRocks();
         PlaceGrass();
-        
     }
     //------------------------------------------Map------------------------------------------------------------------------------------
     public void GenerateMap()
     {
+
+        if (height != width)
+            width = height;
+
+        // Contour de l'île
+        falloffMap = FallOffGenerator.GenerateFalloffMap(height);
+
+        // Bruit de Perlin
         float[,] noiseMap = PerlinNoise.PerlinNoiseMap(width, height, seed, perlinScale, offset, octaves, persistance, lacunarity);
+
         treeNoiseMap = PerlinNoise.PerlinNoiseMap(width, height, seed + 1, perlinScale, offset, octaves, persistance, lacunarity);
         usedMap = noiseMap;
+
         Color[] colorMap = new Color[width * height];
         float[] heights = new float[width * height];
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
+                // On retranche les valeurs du tableau falloffMap au tableau noiseMap pour obtenir une île
                 if (useFalloff)
                     noiseMap[i, j] = noiseMap[i, j] - falloffMap[i, j];
                 float currentHeight = noiseMap[i, j];
                 
+                // Attribution des couleurs selon les hauteurs
                 for (int terrainType = 0; terrainType < regions.Length; terrainType++)
                 {
                     if (currentHeight <= regions[terrainType].height)
@@ -108,10 +112,13 @@ public class DisplayMap : MonoBehaviour
                 }
             }
         }
+
         Texture2D noiseTexture = PerlinNoise.PerlinColorTexture(colorMap, width, height);
-        //GetComponent<Renderer>().material.mainTexture = noiseTexture;
+
         GetComponent<MeshFilter>().mesh = MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, meshHeightCurve, invLOD);
+
         vertices = GetComponent<MeshFilter>().mesh.vertices.ToList();
+
         mesh = GetComponent<MeshFilter>().mesh;
         
         GetComponent<MeshRenderer>().material.mainTexture = noiseTexture;

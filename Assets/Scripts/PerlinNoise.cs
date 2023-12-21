@@ -9,6 +9,8 @@ using Color = UnityEngine.Color;
 
 public class PerlinNoise
 {
+
+    // Création de la carte de bruit de Perlin
     public static float[,] PerlinNoiseMap(int width, int height, int seed, float perlinScale, Vector2 offset, int octaves, float persistance, float lacunarity)
     {
         float[,] noiseMap = new float[width,height];
@@ -20,6 +22,8 @@ public class PerlinNoise
 
         System.Random prng = new System.Random(seed);
         Vector2[] octavesOffsets = new Vector2[octaves];
+
+        // Initialisation des offsets des octaves pour pas que toutes les valeurs soient centrées en (0, 0)
         for (int k = 0; k < octaves; k++)
         {
             float offsetX = prng.Next(-100000, 100000) + offset.x;
@@ -30,6 +34,7 @@ public class PerlinNoise
         float maxNoiseHeight = float.MinValue;
         float minNoiseHeight = float.MaxValue;
 
+        // Calcul des valeurs du bruit de Perlin
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
@@ -38,11 +43,16 @@ public class PerlinNoise
                 float frequency = 1;
                 float noiseHeight = 0;
 
+                // Loop sur le nombre d'octaves
                 for (int k = 0; k < octaves; k++)
                 {
+                    // Rescaling des coordonnées et ajout d'un offset ainsi que d'octaves
                     float Xcoord = (float)(i - width / 2f) * perlinScale * frequency / width + octavesOffsets[k].x + 100000;
                     float Ycoord = (float)(j - height / 2f) * perlinScale * frequency / height + octavesOffsets[k].y + 100000;
+
                     float noise = Mathf.PerlinNoise(Xcoord, Ycoord) * 2 - 1;
+
+                    // On ajoute du bruit supplémentaire par dessus le bruit initial pour avoir des montagnes et des plages avec une forme plus naturelle
 
                     noiseHeight += noise * amplitude;
 
@@ -62,6 +72,7 @@ public class PerlinNoise
             }
         }
 
+        // Les valeurs présentes dans le tableau noiseMap sont seuillées pour être remises entre 0 et 1
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
@@ -69,8 +80,10 @@ public class PerlinNoise
                 noiseMap[i,j] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, noiseMap[i,j]);
             }
         }
-                return noiseMap;
+        return noiseMap;
     }
+
+    // Génération d'une texture2D en nuances de gris à partir du bruit de Perlin
     public static Texture2D PerlinGrayTexture(float[,] noiseMap)
     {
         Texture2D noiseTexture = new Texture2D(noiseMap.GetLength(0), noiseMap.GetLength(1));
@@ -85,6 +98,8 @@ public class PerlinNoise
         noiseTexture.Apply();
         return noiseTexture;
     }
+
+    // Génération d'une texture2D en couleurs
     public static Texture2D PerlinColorTexture(Color[] colorMap, int width, int height)
     {
         Texture2D noiseTexture = new Texture2D(height, width);

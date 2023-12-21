@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class FallOffGenerator
 {
+    // Génération du tableau 2D qui correspond aux valeurs qu'on va retrancher à la carte du bruit de Perlin pour obtenir une île
     public static float[,] GenerateFalloffMap(int size)
     {
         float[,] falloffMap = new float[size, size];
@@ -34,6 +35,7 @@ public static class FallOffGenerator
         return value_powered / (value_powered + Mathf.Pow((b - b * value), a));
     }
 
+    // Création d'un gradient radial pour faire un volcan par exemple
     public static float[,] GenerateRadialGradientMap(int size)
     {
         float[,] gradientRadialMap = new float[size, size];
