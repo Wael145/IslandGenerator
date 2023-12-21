@@ -16,9 +16,66 @@ Il s'agit de la génération procédurale d'une île et gèrer l'emplacement des
 </div>
 <div>
   <h3>Terrain Generation :</h3>
-    <br><br>
-<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/0546fa90-8d28-4820-bef7-302cb70b4263">
+
+<h4> Génération de la texture :</h4>
+La génération procédurale de terrains peut être réalisée à l'aide de nombreux algorithmes. Le choix a été fait ici d'utiliser l'algorithme du bruit de Perlin afin de générer un terrain en 3 dimensions. L'avantage du bruit de Perlin est qu'il permet de générer une grille de valeurs continues, ce qui est très pratique pour ensuite générer un terrain cohérent. 
+<br><br>
+
+La première étape a donc été de générer une texture 2D sur Unity. Pour cela, on crée un tableau à deux dimensions et chaque case du tableau contiendra un nombre flottant entre 0 et 1 calculé à l'aide de la fonction PerlinNoise de Unity. A partir de ce tableau, on peut générer une texture en deux dimensions en nuances de gris en associant à chaque point du tableau une couleur grise proportionnelle à la valeur en sortie de la fonction PerlinNoise.
+
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/0546fa90-8d28-4820-bef7-302cb70b4263" alt = "Texture 2D en nuances de gris" width = 200>
+
+
+Nous avons donc à disposition une texture en deux dimensions issu d'un tableau à deux entrées. On veut alors obtenir une texture en couleurs. Pour cela, on peut associer à chaque valeur du tableau une couleur. On peut modifier ces plages de valeur dans l'inspecteur de Unity. Un exemple de valeurs qu'on utilise pour obtenir la texture d'un terrain avec des étendues d'eau et des montagnes :
+
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/3295bb69-e4a6-419e-a40e-c685c7ee4727" width = 200>
+
+
+Ces régions indiquent que pour une hauteur entre 0 et 0.3, la couleur affichée sera du bleu foncé, puis entre 0.3 et 0.4 ce sera du bleu un peu plus clair etc. On peut changer chaque couleur dans l'inspecteur, ajouter de nouvelles régions ou en supprimer et changer les valeurs des hauteurs minimum et maximum.
+Cela permet d'obtenir une image comme cela.
+
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/448d0c0b-d5f5-492c-8a9d-74327ffec0c9" width = 200>
+
+
+On peut ensuite complexifier le code du bruit de Perlin afin d'ajouter divers paramètres pour avoir une carte avec plus de substance et qui semble plus naturelle. On a alors des paramètres en plus dans l'inspecteur que l'on peut faire varier : le nombre d'octaves, la persistance et la lacunarité. Ces trois paramètres vont en quelque sorte rajouter un bruit par dessus le bruit de Perlin initial et cela donne le résultat suivant : on voit que les plages des îles ont des formes plus naturelles.
+
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/4dbd3fe4-dbb7-4d40-bb9b-6d845fe4691f" width = 400> <img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/b188c61a-26c2-4b88-93d9-43e925b9cd4f" width = 200>
+
+<div>
+<h4>Création du maillage :</h4>
+
+Après avoir obtenu une texture satisfaisante en couleurs, on peut générer le maillage de montagnes assez simplement. Pour cela il suffit de créer un plan en 2D de la même taille que la texture, et à chaque sommet du maillage, on lui donne une hauteur proportionnelle à la valeur du bruit de Perlin en ce point. On peut ensuite appliquer la texture créée précédemment sur le maillage pour obtenir le rendu suivant : 
+
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/309699ac-ef88-4e82-8ddc-6bf96f3ce887" width = 500> <img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/97386c42-1e95-4699-a2be-3204d6f1bf8d" width = 500>
+
+On voit un premier problème lorsqu'on applique la texture directement sur le maillage : les étendues d'eau ne sont pas plates. C'est normal, et pour remédier à cela, on peut utiliser l'outil AnimationCurve d'Unity.
+
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/c8580c8d-fc43-48f3-8f49-18be06ac9435" width = 400>
+
+Cette courbe peut être modifiée très facilement dans l'inspecteur et elle permet de définir une fonction mathématique de manière visuelle, cette fonction va associer à chaque valeur sur l'axe des x une nouvelle valeur sur l'axe des y. On va ensuite utiliser cette fonction dans l'algorithme qui génère le maillage du terrain afin de modifier les hauteurs des sommets. Sur la courbe précédente, on voit que les valeurs entre 0 et 0.4 vont toutes être ramenées à 0 pour pouvoir avoir des étendues d'eau planes. Après application on obtient : 
+
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/dc5794cb-d666-4c36-acfb-59b3182b3e88" width = 400> 
 </div>
+<div>
+	
+<h4> Création de l'île :</h4>
+
+La dernière étape consiste à créer l'île en ajoutant de l'eau sur les bords du terrain qui est généré. Pour réaliser cela, on va superposer à la carte du bruit de Perlin généré une autre carte de bruit qui ne sera pas générée procéduralement. 
+
+<img src = "https://github.com/Wael145/IslandGenerator/assets/144930233/cb88526c-4572-4484-9707-f6f95558d40a" width = 200> 
+
+On soustrait à chaque valeur du tableau du bruit de Perlin, le bruit du deuxième tableau et on seuille les valeurs pour qu'elles restent entre 0 et 1. Tout cela permet d'obtenir une carte de la même taille que précédemment et pour laquelle les sommets proches des bords ont toute une hauteur de 0 et les sommets proches du centre ont une hauteur peu changée. Ainsi on obtient bien une île et l'utilisation d'une carte générée par une fonction mathématique continue permet en fait de garder une continuité sur le maillage obtenu au final.
+
+<img src ="https://github.com/Wael145/IslandGenerator/assets/144930233/51ac8908-0031-49eb-af4f-348cda08bef6" width = 400>
+
+
+
+ 
+</div>
+
+</div>
+
+
 <div>
   <h3>Objects Placement :</h3>
    
